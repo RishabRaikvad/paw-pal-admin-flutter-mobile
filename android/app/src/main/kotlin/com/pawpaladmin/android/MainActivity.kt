@@ -1,4 +1,4 @@
-package com.pawpaladmin.paw_pal_admin
+package com.pawpaladmin.android
 
 import io.flutter.embedding.android.FlutterActivity
 

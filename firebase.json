@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"paw-pal-app","appId":"1:905043945814:android:a18e041e7803f342ba4ef7","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"paw-pal-app","configurations":{"android":"1:905043945814:android:a18e041e7803f342ba4ef7","ios":"1:905043945814:ios:fd0437baba9100d9ba4ef7"}}}}}}
