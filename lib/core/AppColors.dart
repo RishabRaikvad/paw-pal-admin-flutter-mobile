@@ -4,6 +4,8 @@ abstract class AppColors {
   const AppColors();
 
   static const Color primaryColor = Color(0xffFD6C02);
+  static const Color drawerArrowColor = Color(0xffFEAE68);       // softer orange
+
   static const Color secondaryColor = Color(0xff04845E);
   static const Color white = Color(0xffFFFFFF);
   static const Color black = Color(0xff120B06);

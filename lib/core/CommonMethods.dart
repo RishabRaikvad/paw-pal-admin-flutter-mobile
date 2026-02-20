@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 
+import '../routes/routes.dart';
 import 'AppStrings.dart';
 
 class CommonMethods {
@@ -93,12 +94,26 @@ class CommonMethods {
 
   static String getFirebaseAuthErrorMessage(FirebaseAuthException e) {
     switch (e.code) {
-      case AppStrings.errorInvalidVerificationCode:
-        return AppStrings.otpInvalid;
-      case AppStrings.errorSessionExpired:
-        return AppStrings.otpExpired;
+      case 'user-not-found':
+        return "No user found with this email.";
+
+      case 'wrong-password':
+        return "Incorrect password. Please try again.";
+
+      case 'invalid-email':
+        return "The email address is invalid.";
+
+      case 'user-disabled':
+        return "This user account has been disabled.";
+
+      case 'too-many-requests':
+        return "Too many attempts. Please try again later.";
+
+      case 'invalid-credential':
+        return "Invalid credentials. Please check your email and password.";
+
       default:
-        return AppStrings.otpVerificationFailed;
+        return "Login failed. Please try again.";
     }
   }
 
@@ -134,12 +149,12 @@ class CommonMethods {
     return user;
   }
 
-  // static Future<void> firebaseLogOut(BuildContext context) async {
-  //   await FirebaseAuth.instance.signOut();
-  //   if(context.mounted){
-  //     context.goNamed(Routes.loginScreen);
-  //   }
-  // }
+  static Future<void> firebaseLogOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    if(context.mounted){
+      context.goNamed(Routes.loginScreen);
+    }
+  }
 
   static String formatPetAge({required int years, required int months}) {
     int totalMonths = (years * 12) + months;
