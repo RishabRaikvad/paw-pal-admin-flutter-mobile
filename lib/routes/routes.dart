@@ -2,6 +2,7 @@ class Routes {
   // screen Path
   static const rootNamePath = '/';
   static const addVideoScreenPath = '/addVideoScreenPath';
+  static const videoScreenPath = '/videoScreenPath';
   static const loginScreenPath = '/loginScreenPath';
   static const otpScreenPath = '/otpScreenPath';
   static const setupProfileScreenPath = '/setupProfileScreenPath';
@@ -17,6 +18,7 @@ class Routes {
   // screen Name
   static const rootName = 'root';
   static const addVideoScreen = 'addVideoScreen';
+  static const videoScreen = 'videoScreen';
   static const loginScreen = 'loginScreen';
   static const otpScreen = 'otpScreen';
   static const setupProfileScreen = 'setupProfileScreen';

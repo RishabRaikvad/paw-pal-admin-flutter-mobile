@@ -23,7 +23,7 @@ Widget commonButtonView({
   required VoidCallback onClicked,
   bool isLoading = false,
   Color? bgColor,
-  double? fontSize
+  double? fontSize,
 }) {
   return ElevatedButton(
     onPressed: () {
@@ -40,23 +40,23 @@ Widget commonButtonView({
     ),
     child: isLoading
         ? SizedBox(
-      height: 24,
-      width: 24,
-      child: CircularProgressIndicator(
-        color: Colors.white,
-        strokeWidth: 2,
-      ),
-    )
+            height: 24,
+            width: 24,
+            child: CircularProgressIndicator(
+              color: Colors.white,
+              strokeWidth: 2,
+            ),
+          )
         : Text(
-      buttonText,
-      style: TextStyle(
-        fontSize: fontSize ?? 16,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 1,
-      ),
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-    ),
+            buttonText,
+            style: TextStyle(
+              fontSize: fontSize ?? 16,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 1,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
   );
 }
 
@@ -75,7 +75,7 @@ Widget commonTitle({
   return Text(
     title,
     style:
-    style ??
+        style ??
         TextStyle(
           fontSize: fontSize,
           fontWeight: fontWeight,
@@ -109,7 +109,6 @@ Widget commonTextFieldWithLabel({
   TextInputType inputType = TextInputType.text,
   TextInputAction textInputAction = TextInputAction.next,
   bool obscureText = false,
-
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,7 +162,7 @@ Widget commonTextFieldWithLabel({
 Widget commonBackWithHeader({
   required BuildContext context,
   String? title,
-  bool isShowTitle = false,
+  bool isShowTitle = true,
 }) {
   return InkResponse(
     onTap: () {
@@ -171,18 +170,20 @@ Widget commonBackWithHeader({
     },
     child: Row(
       children: [
-        Icon(
-          Icons.arrow_back,
-          size: 22,
-        ),
+        Icon(Icons.arrow_back, size: 22),
 
         if (isShowTitle)
-          Expanded(child: commonTitle(title: title ?? "",fontSize: 16,fontWeight: FontWeight.w600)),
+          Expanded(
+            child: commonTitle(
+              title: title ?? "",
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
       ],
     ),
   );
 }
-
 
 Widget commonOutLineButtonView({
   required BuildContext context,
@@ -190,7 +191,7 @@ Widget commonOutLineButtonView({
   required VoidCallback onClicked,
   bool isLoading = false,
   Color? bgColor,
-  double? fontSize
+  double? fontSize,
 }) {
   return OutlinedButton(
     onPressed: () {
@@ -206,24 +207,24 @@ Widget commonOutLineButtonView({
     ),
     child: isLoading
         ? SizedBox(
-      height: 24,
-      width: 24,
-      child: CircularProgressIndicator(
-        color: Colors.white,
-        strokeWidth: 2,
-      ),
-    )
+            height: 24,
+            width: 24,
+            child: CircularProgressIndicator(
+              color: Colors.white,
+              strokeWidth: 2,
+            ),
+          )
         : Text(
-      buttonText,
-      style: TextStyle(
-        fontSize: fontSize ?? 16,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 1,
-        color: AppColors.black,
-      ),
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-    ),
+            buttonText,
+            style: TextStyle(
+              fontSize: fontSize ?? 16,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 1,
+              color: AppColors.black,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
   );
 }
 
@@ -249,21 +250,21 @@ Widget uploadImageView({
       builder: (context, img, child) {
         return img != null
             ? ClipRRect(
-          borderRadius: BorderRadius.circular(radius),
-          child: Image.file(
-            img,
-            width: width,
-            height: height,
-            fit: BoxFit.cover,
-          ),
-        )
+                borderRadius: BorderRadius.circular(radius),
+                child: Image.file(
+                  img,
+                  width: width,
+                  height: height,
+                  fit: BoxFit.cover,
+                ),
+              )
             : SvgPicture.asset(
-          image,
-          fit: boxFit,
-          alignment: alignment,
-          width: width,
-          height: height,
-        );
+                image,
+                fit: boxFit,
+                alignment: alignment,
+                width: width,
+                height: height,
+              );
       },
     ),
   );
@@ -277,7 +278,7 @@ Widget commonNetworkImage({
   double borderRadius = 0,
   String? placeholderImage,
   String? errorImage,
-  BorderRadiusGeometry ? boarderRadiusOnly
+  BorderRadiusGeometry? boarderRadiusOnly,
 }) {
   return ClipRRect(
     borderRadius: boarderRadiusOnly ?? BorderRadius.circular(borderRadius),
@@ -286,20 +287,18 @@ Widget commonNetworkImage({
       width: width,
       height: height,
       fit: fit,
-      placeholder: (context, url) =>
-          SvgPicture.asset(
-            AppImages.icAppIconPlaceholder,
-            width: width,
-            height: height,
-            fit: BoxFit.contain,
-          ),
-      errorWidget: (context, url, error) =>
-          SvgPicture.asset(
-            AppImages.icAppIconPlaceholder,
-            width: width,
-            height: height,
-            fit: BoxFit.contain,
-          ),
+      placeholder: (context, url) => SvgPicture.asset(
+        AppImages.icAppIconPlaceholder,
+        width: width,
+        height: height,
+        fit: BoxFit.contain,
+      ),
+      errorWidget: (context, url, error) => SvgPicture.asset(
+        AppImages.icAppIconPlaceholder,
+        width: width,
+        height: height,
+        fit: BoxFit.contain,
+      ),
     ),
   );
 }
@@ -308,7 +307,7 @@ Widget commonSearchBar({
   required TextEditingController controller,
   required ValueChanged<String?>? onSearchChange,
   required Function(String) onSearch,
-  required String title
+  required String title,
 }) {
   return TextField(
     controller: controller,
@@ -345,58 +344,135 @@ Widget commonSearchBar({
   );
 }
 
-Widget commonPetCareVideoCard(int index) {
+Widget commonPetCareVideoCard({
+  required String videoId,
+  required String thumbnail,
+  required String videoTitle,
+  required String duration,
+  required String channelName,
+  required String channelImage,
+  required String videoUrl,
+  required ValueNotifier<bool> isVisible,
+  required ValueChanged<bool> onChange,
+}) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 10),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        commonNetworkImage(
-            imageUrl: "https://loremflickr.com/500/500/pet,grooming?lock=${index +
-                1}", width: double.infinity, height: 200,borderRadius: 10),
-        SizedBox(height: 10),
-        Row(
-          spacing: 10,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(radius: 22, backgroundColor: AppColors.primaryColor),
-            Flexible(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                spacing: 5,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  commonTitle(
-                    title: "Bird Pet Parakeet Colorful Singing Companion",
-                    fontWeight: FontWeight.w600,
-                    maxLines: 2,
-                    overFlow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.start,
+    child: GestureDetector(
+      onTap: () {
+        CommonMethods.openYoutube(videoUrl);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              commonNetworkImage(
+                imageUrl: thumbnail,
+                width: double.infinity,
+                height: 200,
+                borderRadius: 10,
+              ),
+
+              Positioned(
+                bottom: 20,
+                right: 10,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 15,
                   ),
-                  Row(
-                    spacing: 5,
+                  decoration: BoxDecoration(
+                    color: AppColors.grey.withValues(alpha: 0.65),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       commonTitle(
-                        title: "Feathered Friend",
+                        title: "Visible to User",
+                        color: AppColors.white,
                         fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.grey,
                       ),
-                      CircleAvatar(backgroundColor: AppColors.grey, radius: 3),
-                      commonTitle(
-                        title: "5:12 min",
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.grey,
+                      const SizedBox(width: 8),
+                      ValueListenableBuilder<bool>(
+                        valueListenable: isVisible,
+                        builder: (context, value, _) {
+                          return SizedBox(
+                            height: 20,
+                            child: Transform.scale(
+                              scale: 0.85,
+                              child: Switch(
+                                value: value,
+                                onChanged: (newValue) {
+                                  onChange(newValue);
+                                },
+                                activeTrackColor: AppColors.greenColor,
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                inactiveThumbColor: AppColors.white,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+          const SizedBox(height: 10),
+          Row(
+            spacing: 10,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                radius: 22,
+                child: ClipOval(
+                  child: commonNetworkImage(imageUrl: channelImage),
+                ),
+              ),
+              Flexible(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 5,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    commonTitle(
+                      title: videoTitle,
+                      fontWeight: FontWeight.w600,
+                      maxLines: 2,
+                      overFlow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.start,
+                    ),
+                    Row(
+                      spacing: 5,
+                      children: [
+                        commonTitle(
+                          title: channelName,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.grey,
+                        ),
+                        CircleAvatar(
+                          backgroundColor: AppColors.grey,
+                          radius: 3,
+                        ),
+                        commonTitle(
+                          title: duration,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.grey,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     ),
   );
 }
@@ -435,8 +511,10 @@ Widget commonProductCard(int index) {
                     ),
                     padding: const EdgeInsets.all(16),
                     child: commonNetworkImage(
-                        imageUrl: "https://loremflickr.com/500/500/pet,grooming?lock=${index +
-                            1}", borderRadius: 10),
+                      imageUrl:
+                          "https://loremflickr.com/500/500/pet,grooming?lock=${index + 1}",
+                      borderRadius: 10,
+                    ),
                   ),
                 ),
 
@@ -515,7 +593,12 @@ Widget commonProductCard(int index) {
   );
 }
 
-Widget commonPetCard({required String petName,required String petBread,required String img,required int price}) {
+Widget commonPetCard({
+  required String petName,
+  required String petBread,
+  required String img,
+  required int price,
+}) {
   return Container(
     decoration: BoxDecoration(
       color: AppColors.white,
@@ -531,10 +614,7 @@ Widget commonPetCard({required String petName,required String petBread,required 
               children: [
                 AspectRatio(
                   aspectRatio: 1.1,
-                  child: commonNetworkImage(
-                    imageUrl: img,
-                    borderRadius: 20,
-                  ),
+                  child: commonNetworkImage(imageUrl: img, borderRadius: 20),
                 ),
                 Positioned(
                   right: 0,
@@ -602,7 +682,6 @@ Widget sectionHeaderWithSeeAll({
   );
 }
 
-
 Widget bulletText(String text, {double padding = 8.0}) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: padding),
@@ -611,11 +690,7 @@ Widget bulletText(String text, {double padding = 8.0}) {
       children: [
         const Text(
           "•  ",
-          style: TextStyle(
-            fontSize: 16,
-            color: AppColors.grey,
-            height: 1.4,
-          ),
+          style: TextStyle(fontSize: 16, color: AppColors.grey, height: 1.4),
         ),
         Expanded(
           child: commonTitle(
@@ -655,19 +730,15 @@ SliverGrid shimmerGrid({int count = 4}) {
 
 SliverList shimmerListSliver({double height = 100}) {
   return SliverList(
-    delegate: SliverChildBuilderDelegate(
-          (context, index) {
-        return Container(
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          height: height,
-          decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-            borderRadius: BorderRadius.circular(16),
-          ),
-        );
-      },
-      childCount: 5,
-    ),
+    delegate: SliverChildBuilderDelegate((context, index) {
+      return Container(
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        height: height,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade300,
+          borderRadius: BorderRadius.circular(16),
+        ),
+      );
+    }, childCount: 5),
   );
 }
-

@@ -13,3 +13,15 @@ final class VideoAddErrorState extends VideoState {
 
   VideoAddErrorState(this.error);
 }
+
+final class VideoLoadingState extends VideoState {}
+
+final class VideoRefreshState extends VideoState {}
+
+final class VideoSuccessState extends VideoState {}
+
+final class VideoErrorState extends VideoState {
+  final String error;
+
+  VideoErrorState(this.error);
+}

@@ -53,4 +53,5 @@ abstract class AppImages {
 
  /// images
  static const String imgWelcome = "assets/images/welcome.png";
+ static const String imgLoginBg = "assets/images/img_login_bg.png";
 }

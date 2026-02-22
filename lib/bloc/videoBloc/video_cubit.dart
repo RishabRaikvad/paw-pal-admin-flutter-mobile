@@ -25,6 +25,8 @@ class VideoCubit extends Cubit<VideoState> {
 
   final ValueNotifier<File?> thumbnailNotifier = ValueNotifier(null);
   final ValueNotifier<File?> ownerImageNotifier = ValueNotifier(null);
+  List<VideoModel> lstPetCareVideo = [];
+  Map<String, ValueNotifier<bool>> isVisibleUserStatus = {};
 
   void uploadPetCareVideo(BuildContext context) async {
     emit(VideoAddLoadingState());
@@ -48,7 +50,7 @@ class VideoCubit extends Cubit<VideoState> {
         ownerImage: ownerImage ?? "",
         ownerName: ownerNameController.text.trim(),
         videoUrl: videoUrlController.text.trim(),
-        isVisible: true
+        isVisible: true,
       );
       await services.createPetCareVideo(videoModel);
       CommonMethods().showSuccessToast("Video Uploaded SuccessFully");
@@ -57,6 +59,47 @@ class VideoCubit extends Cubit<VideoState> {
       emit(VideoAddSuccessState());
     } catch (e) {
       emit(VideoAddErrorState(e.toString()));
+    }
+  }
+
+  Future<void> getPetCareVideos() async {
+    emit(lstPetCareVideo.isEmpty ? VideoLoadingState() : VideoRefreshState());
+    try {
+      final snapshot = await fireStore.collection("pet_care_videos").get();
+      lstPetCareVideo = snapshot.docs
+          .map((doc) => VideoModel.fromJson(doc.data()))
+          .toList();
+      for (var video in lstPetCareVideo) {
+        final notifier = isVisibleUserStatus.putIfAbsent(
+          video.id,
+          () => ValueNotifier<bool>(video.isVisible),
+        );
+        notifier.value = video.isVisible;
+      }
+      emit(VideoSuccessState());
+    } catch (e) {
+      emit(VideoErrorState(e.toString()));
+    }
+  }
+
+  Future<void> toggleVisibleStatus(
+      String videoId,
+      bool newValue,
+      ) async {
+    final notifier = isVisibleUserStatus[videoId];
+    if (notifier == null) return;
+
+    final old = notifier.value;
+    notifier.value = newValue;
+
+    try {
+      await fireStore
+          .collection("pet_care_videos")
+          .doc(videoId)
+          .update({"isVisible": newValue});
+    } catch (e) {
+      notifier.value = old;
+      emit(VideoErrorState(e.toString()));
     }
   }
 

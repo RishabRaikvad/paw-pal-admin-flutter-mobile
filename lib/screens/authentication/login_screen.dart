@@ -4,6 +4,10 @@ import 'package:paw_pal_admin/bloc/authBloc/auth_cubit.dart';
 import 'package:paw_pal_admin/core/AppColors.dart';
 import 'package:paw_pal_admin/core/CommonMethods.dart';
 
+import '../../core/AppImages.dart';
+import '../../core/AppStrings.dart';
+import '../../core/constant.dart';
+import '../../utils/ui_helper.dart';
 import '../../utils/widget_helper.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -29,17 +33,37 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: mainView());
+    return Scaffold(
+      body: Stack(
+        children: [
+          Image.asset(
+            AppImages.imgLoginBg,
+            height: double.infinity,
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
+          Positioned(
+            left: 16,
+            right: 16,
+            bottom: UIHelper.screenHeight(context) * 0.018,
+            child: mainView(),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget mainView() {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+        padding: const EdgeInsets.symmetric(horizontal: 0.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 50),
+            welcomeTitle(),
+            const SizedBox(height: 3),
+            welcomeSubTitle(),
+            const SizedBox(height: 4),
             commonTextFieldWithLabel(
               label: "Email",
               hint: "Enter your email",
@@ -58,7 +82,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: !value,
                   controller: passwordController,
                   suffixIcon: IconButton(
-                    icon: Icon(value ? Icons.visibility : Icons.visibility_off,color: AppColors.primaryColor,),
+                    icon: Icon(
+                      value ? Icons.visibility : Icons.visibility_off,
+                      color: AppColors.primaryColor,
+                    ),
                     onPressed: () {
                       isPasswordVisible.value = !value;
                     },
@@ -76,13 +103,68 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Widget welcomeTitle() {
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: AppStrings.welcome,
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+              fontFamily: Constant.fontFamily,
+            ),
+          ),
+          TextSpan(
+            text: '${AppStrings.to} ',
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.w700,
+              color: AppColors.black,
+              fontFamily: Constant.fontFamily,
+            ),
+          ),
+          TextSpan(
+            text: AppStrings.paw,
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.w700,
+              color: AppColors.primaryColor,
+              fontFamily: Constant.fontFamily,
+            ),
+          ),
+          TextSpan(
+            text: AppStrings.pal,
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.w700,
+              color: AppColors.black,
+              fontFamily: Constant.fontFamily,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget welcomeSubTitle() {
+    return commonTitle(
+      title:
+          "Sign in to securely manage platform operations and user activity.",
+      fontSize: 14,
+      textAlign: TextAlign.start,
+        color: AppColors.grey
+    );
+  }
+
   Widget btnLogin() {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
         final isLoading = state is AuthLoadingState;
         return commonButtonView(
           context: context,
-          buttonText: "Login",
+          buttonText: "Access Dashboard",
           isLoading: isLoading,
           onClicked: () {
             final email = emailController.text.trim();

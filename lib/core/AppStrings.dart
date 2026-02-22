@@ -2,7 +2,7 @@ abstract class AppStrings {
   static const String appName = "Paw Pal";
   static const welcome = "Welcome";
   static const enterPhone = "Enter your phone number to access your";
-  static const to = "to";
+  static const to = " Back to";
   static const paw = "Paw";
   static const pal = "Pal";
   static const account = "account.";

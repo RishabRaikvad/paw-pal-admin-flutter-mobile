@@ -18,70 +18,69 @@ class CustomDrawer extends StatelessWidget {
       children: [
         Drawer(
           backgroundColor: AppColors.white,
-          child: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(30),
-                        child: SvgPicture.asset(
-                          AppImages.icAppIconPlaceholder,
-                          height: 60,
-                          width: 60,
+          child: RepaintBoundary(
+            child: SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        RepaintBoundary(
+                          child: SvgPicture.asset(AppImages.icPaw, height: 60, width: 60),
                         ),
-                      ),
-                      const SizedBox(width: 12),
-                      commonTitle(
-                        title: user?.email ?? "",
-                        color: AppColors.black,
-                      ),
-                    ],
-                  ),
-                ),
-
-                drawerItem(context, title: "Add Pet Care Video", route: Routes.addVideoScreen),
-                const SizedBox(width: 30),
-                drawerItem(context, title: "Feedback", route: ""),
-                const SizedBox(width: 30),
-                drawerItem(
-                  context,
-                  title: "Terms & Conditions",
-                  route: "",
-                ),
-                const SizedBox(width: 30),
-                drawerItem(context, title: "Privacy Policy", route: ""),
-                const SizedBox(width: 30),
-                drawerItem(context, title: "Contact Us", route: ""),
-                const SizedBox(width: 30),
-                drawerItem(context, title: "Share App", route: ""),
-                const SizedBox(width: 30),
-                drawerItem(context, title: "Delete Account", route: ""),
-                const SizedBox(width: 30),
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 19.0,
-                    vertical: 18,
-                  ),
-                  child: InkResponse(
-                    onTap: () {
-                      CommonMethods.firebaseLogOut(context);
-                    },
-                    child: commonTitle(
-                      title: "Log Out",
-                      color: AppColors.redColor,
-                      fontSize: 16,
-                      textAlign: TextAlign.start,
-                      fontWeight: FontWeight.w600,
+                        const SizedBox(width: 14),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            commonTitle(
+                              title: "Admin",
+                              color: AppColors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            commonTitle(
+                              title: user?.email ?? "",
+                              color: AppColors.grey,
+                              fontSize: 14,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-              ],
+            
+                  drawerItem(
+                    context,
+                    title: "Videos",
+                    route: Routes.videoScreen,
+                  ),
+                  drawerItem(context, title: "Manage User", route: ""),
+                  drawerItem(context, title: "Manage Products", route: ""),
+                  drawerItem(context, title: "Manage Hospitals", route: ""),
+            
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 19.0,
+                      vertical: 15,
+                    ),
+                    child: InkResponse(
+                      onTap: () {
+                        CommonMethods.firebaseLogOut(context);
+                      },
+                      child: commonTitle(
+                        title: "Log Out",
+                        color: AppColors.primaryColor,
+                        fontSize: 17,
+                        textAlign: TextAlign.start,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         ),
@@ -92,7 +91,7 @@ class CustomDrawer extends StatelessWidget {
           child: GestureDetector(
             onTap: () => Navigator.pop(context),
             child: CircleAvatar(
-              backgroundColor: AppColors.drawerArrowColor,
+              backgroundColor: AppColors.primaryColor,
               child: const Icon(
                 Icons.chevron_left,
                 color: Colors.white,
@@ -111,16 +110,19 @@ class CustomDrawer extends StatelessWidget {
     required String route,
     Color color = Colors.black,
   }) {
-    return ListTile(
-      title: commonTitle(
-        title: title,
-        fontWeight: FontWeight.w600,
-        fontSize: 16,
-        textAlign: TextAlign.start,
-      ),
+    return InkResponse(
       onTap: () {
-         _navigate(context, route);
+        _navigate(context, route);
       },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 19.0,vertical: 15),
+        child: commonTitle(
+          title: title,
+          fontWeight: FontWeight.w600,
+          fontSize: 17,
+          textAlign: TextAlign.start,
+        ),
+      ),
     );
   }
 

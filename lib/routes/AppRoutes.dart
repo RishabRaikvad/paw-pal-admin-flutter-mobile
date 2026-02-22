@@ -5,6 +5,7 @@ import 'package:paw_pal_admin/screens/dashboard/dashboard_screen.dart';
 import 'package:paw_pal_admin/screens/videoManageMent/add_video_screen.dart';
 
 import '../screens/splash/splash_screen.dart';
+import '../screens/videoManageMent/video_screen.dart';
 
 class AppRoutes {
   static final GoRouter _router = GoRouter(
@@ -30,6 +31,11 @@ class AppRoutes {
         path: Routes.addVideoScreenPath,
         name: Routes.addVideoScreen,
         builder: (context, state) => AddVideoScreen(),
+      ),
+      GoRoute(
+        path: Routes.videoScreenPath,
+        name: Routes.videoScreen,
+        builder: (context, state) => VideoScreen(),
       ),
     ],
   );

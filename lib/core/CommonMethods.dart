@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 import '../routes/routes.dart';
@@ -178,5 +179,16 @@ class CommonMethods {
 
     // Show years + months
     return "$finalYears year${finalYears > 1 ? "s" : ""} $finalMonths month${finalMonths > 1 ? "s" : ""}";
+  }
+
+  static Future<void> openYoutube(String url) async {
+    final Uri uri = Uri.parse(url);
+
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not open YouTube';
+    }
   }
 }
