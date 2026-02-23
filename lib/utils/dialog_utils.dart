@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:paw_pal_admin/utils/ui_helper.dart';
 import 'package:paw_pal_admin/utils/widget_helper.dart';
 
-
 import '../core/AppColors.dart';
 import '../core/AppImages.dart';
 import '../core/AppStrings.dart';
@@ -142,6 +141,90 @@ class DialogUtils {
                             onClicked: () {
                               CommonMethods.firebaseLogOut(context);
                             },
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  static void deleteFaqDialog({
+    required VoidCallback onTap,
+    required BuildContext context,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: AppColors.white,
+          insetPadding: EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: UIHelper.screenHeight(context) * 0.8,
+            ),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Column(
+                  spacing: 5,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: SvgPicture.asset(
+                        AppImages.icDialogDelete,
+                        height: 70,
+                        width: 70,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: commonTitle(
+                        title: "Delete FAQ?",
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: commonTitle(
+                        title: "This FAQ will be permanently removed and cannot be recovered.",
+                        fontSize: 14,
+                        color: AppColors.grey,
+                      ),
+                    ),
+
+                    const SizedBox(height: 5),
+                    Row(
+                      spacing: 10,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: commonOutLineButtonView(
+                            context: context,
+                            buttonText: "Don’t Delete",
+                            onClicked: () {
+                              context.pop();
+                            },
+                            fontSize: 12,
+                          ),
+                        ),
+                        Flexible(
+                          child: commonButtonView(
+                            context: context,
+                            buttonText: "Yes, Delete!",
+                            onClicked: onTap,
                             fontSize: 12,
                           ),
                         ),

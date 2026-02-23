@@ -33,17 +33,7 @@ class _VideoScreenState extends State<VideoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 28.0),
-        child: FloatingActionButton(
-          onPressed: () {
-            context.pushNamed(Routes.addVideoScreen);
-          },
-          backgroundColor: AppColors.primaryColor,
-          shape: const CircleBorder(),
-          child: Icon(Icons.add, color: AppColors.white, size: 30),
-        ),
-      ),
+      floatingActionButton: commonFlotButton(context,Routes.addVideoScreen),
       body: GradientBackground(child: mainView()),
     );
   }

@@ -5,7 +5,9 @@ abstract class AppImages {
  static const String icPaw = "assets/icons/ic_paw.svg";
  static const String icGetStartedBtn = "assets/icons/ic_get_started_btn.svg";
  static const String icUploadProfile = "assets/icons/ic_upload_profile.svg";
- static const String icMainPet = "assets/icons/ic_main_pet.svg";
+ static const String icThumbnail = "assets/icons/ic_thumbnail.svg";
+ static const String icDelete = "assets/icons/ic_delete.svg";
+ static const String icDialogDelete = "assets/icons/ic_delete_dialog.svg";
  static const String icPetDoc = "assets/icons/ic_pet_doc.svg";
  static const String icPetOther = "assets/icons/ic_pet_other.svg";
  static const String icSetting = "assets/icons/ic_setting.svg";

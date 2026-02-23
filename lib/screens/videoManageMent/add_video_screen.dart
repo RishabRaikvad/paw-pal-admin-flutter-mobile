@@ -2,11 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:paw_pal_admin/bloc/videoBloc/video_cubit.dart';
 import 'package:paw_pal_admin/core/AppImages.dart';
 import 'package:paw_pal_admin/utils/commonWidget/gradient_background.dart';
 
 import '../../core/AppColors.dart';
+import '../../core/AppStrings.dart';
+import '../../core/CommonMethods.dart';
 import '../../utils/widget_helper.dart';
 
 class AddVideoScreen extends StatefulWidget {
@@ -44,11 +47,21 @@ class _AddVideoScreenState extends State<AddVideoScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 20),
+            commonBackWithHeader(context: context, title: "Upload Video"),
+            const SizedBox(height: 20),
             commonTitle(
-              title: "Upload Pet Care Video",
-              fontSize: 20,
+              title: "Publish Pet Care Video",
+              fontSize: 22,
               textAlign: TextAlign.start,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w700,
+            ),
+            const SizedBox(height: 4),
+            commonTitle(
+              title:
+                  "Create trusted and informative content for the PawPal community.",
+              fontSize: 16,
+              textAlign: TextAlign.start,
+              color: AppColors.grey,
             ),
             const SizedBox(height: 20),
             Flexible(
@@ -70,8 +83,17 @@ class _AddVideoScreenState extends State<AddVideoScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        uploadChannelView(),
+        const SizedBox(height: 20),
+        commonTextFieldWithLabel(
+          label: "Channel Name",
+          hint: "Enter Channel Name",
+          context: context,
+          controller: cubit.ownerNameController,
+        ),
+        const SizedBox(height: 20),
         commonTitle(
-          title: "Video Thumbnail",
+          title: "Upload Thumbnail",
           textAlign: TextAlign.start,
           fontSize: 16,
           color: AppColors.grey,
@@ -80,21 +102,26 @@ class _AddVideoScreenState extends State<AddVideoScreen> {
         uploadImageView(
           context: context,
           uploadedImage: cubit.thumbnailNotifier,
-          image: AppImages.icMainPet,
+          image: AppImages.icThumbnail,
           width: double.infinity,
           height: 200,
         ),
-        const SizedBox(height: 25),
-
+        const SizedBox(height: 20),
         commonTextFieldWithLabel(
           label: "Video Title",
           hint: "Enter video title",
           context: context,
           controller: cubit.videoTitleController,
         ),
-
         const SizedBox(height: 20),
-
+        commonTextFieldWithLabel(
+          label: "Video URL",
+          hint: "Enter Video URL/Link",
+          context: context,
+          controller: cubit.videoUrlController,
+          inputType: TextInputType.url,
+        ),
+        const SizedBox(height: 20),
         commonTextFieldWithLabel(
           label: "Video Duration",
           hint: "Eg: 10:30",
@@ -102,53 +129,42 @@ class _AddVideoScreenState extends State<AddVideoScreen> {
           controller: cubit.videoTimeController,
           inputType: TextInputType.number,
         ),
-
-        const SizedBox(height: 20),
-
-        commonTextFieldWithLabel(
-          label: "Video URL",
-          hint: "Paste video link here",
-          context: context,
-          controller: cubit.videoUrlController,
-          inputType: TextInputType.url,
-        ),
-
         const SizedBox(height: 30),
-
-        commonTitle(
-          title: "Owner Details",
-          fontSize: 16,
-          color: AppColors.grey,
-          textAlign: TextAlign.start,
-        ),
-
-        const SizedBox(height: 10),
-
-        Row(
-          children: [
-            uploadImageView(
-              context: context,
-              uploadedImage: cubit.ownerImageNotifier,
-              image: AppImages.icMainPet,
-              width: 80,
-              height: 80,
-              radius: 50,
-              boxFit: BoxFit.cover,
-            ),
-            const SizedBox(width: 15),
-            Expanded(
-              child: commonTextFieldWithLabel(
-                label: "Owner Name",
-                hint: "Enter owner name",
-                context: context,
-                controller: cubit.ownerNameController,
-              ),
-            ),
-          ],
-        ),
-
-        const SizedBox(height: 40),
       ],
+    );
+  }
+
+  Widget uploadChannelView() {
+    return Center(
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () async {
+              final image = await CommonMethods.pickAndCompressImage(
+                context: context,
+              );
+
+              if (image != null) {
+                cubit.ownerImageNotifier.value = image;
+              }
+            },
+            child: ValueListenableBuilder<File?>(
+              valueListenable: cubit.ownerImageNotifier,
+              builder: (context, image, _) {
+                return image != null
+                    ? CircleAvatar(
+                        radius: 50,
+                        backgroundImage: FileImage(image),
+                      )
+                    : SvgPicture.asset(AppImages.icUploadProfile);
+              },
+            ),
+          ),
+
+          SizedBox(height: 10),
+          commonTitle(title: "Upload Channel Photo", color: AppColors.grey),
+        ],
+      ),
     );
   }
 
@@ -158,7 +174,7 @@ class _AddVideoScreenState extends State<AddVideoScreen> {
         final isLoading = state is VideoAddLoadingState;
         return commonButtonView(
           context: context,
-          buttonText: "Upload Video",
+          buttonText: "Publish Video",
           onClicked: () {
             cubit.uploadPetCareVideo(context);
           },

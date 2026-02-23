@@ -53,6 +53,7 @@ class VideoCubit extends Cubit<VideoState> {
         isVisible: true,
       );
       await services.createPetCareVideo(videoModel);
+      await getPetCareVideos();
       CommonMethods().showSuccessToast("Video Uploaded SuccessFully");
       if (!context.mounted) return;
       context.pop();

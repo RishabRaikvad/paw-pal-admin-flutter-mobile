@@ -13,6 +13,7 @@ import '../core/AppColors.dart';
 import '../core/AppImages.dart';
 import '../core/CommonMethods.dart';
 import '../core/constant.dart';
+import '../routes/routes.dart';
 
 final nameRegEx = RegExp(r"^[A-Za-z][A-Za-z\s'.-]{1,29}$");
 final emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
@@ -98,7 +99,7 @@ Widget commonTextFieldWithLabel({
   required String label,
   required String hint,
   required BuildContext context,
-  TextEditingController? controller,
+  required TextEditingController controller,
   Widget? suffixIcon,
   Widget? prefixIcon,
   int maxLines = 1,
@@ -740,5 +741,18 @@ SliverList shimmerListSliver({double height = 100}) {
         ),
       );
     }, childCount: 5),
+  );
+}
+Widget commonFlotButton(BuildContext context,String screenName){
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 28.0),
+    child: FloatingActionButton(
+      onPressed: () {
+        context.pushNamed(screenName);
+      },
+      backgroundColor: AppColors.primaryColor,
+      shape: const CircleBorder(),
+      child: Icon(Icons.add, color: AppColors.white, size: 30),
+    ),
   );
 }
