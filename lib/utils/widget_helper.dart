@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dotted_line/dotted_line.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -580,7 +581,7 @@ Widget commonProductCard(int index) {
                 ),
 
                 commonTitle(
-                  title: CommonMethods().formatPrice(5000),
+                  title: CommonMethods.formatPrice(5000),
                   fontSize: 14,
                   color: AppColors.primaryColor,
                   fontWeight: FontWeight.w700,
@@ -656,7 +657,7 @@ Widget commonPetCard({
                 ),
                 SizedBox(width: 18),
                 commonTitle(
-                  title: CommonMethods().formatPrice(price),
+                  title: CommonMethods.formatPrice(price),
                   fontSize: 14,
                   color: AppColors.primaryColor,
                   fontWeight: FontWeight.w700,
@@ -706,13 +707,13 @@ Widget bulletText(String text, {double padding = 8.0}) {
   );
 }
 
-SliverGrid shimmerGrid({int count = 4}) {
+SliverGrid shimmerGrid({int count = 4,int crossCount = 2,double ratio = 0.75}) {
   return SliverGrid(
-    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 2,
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: crossCount,
       crossAxisSpacing: 8,
       mainAxisSpacing: 14,
-      childAspectRatio: 0.75,
+      childAspectRatio: ratio,
     ),
     delegate: SliverChildBuilderDelegate((context, index) {
       return Shimmer.fromColors(
@@ -754,5 +755,14 @@ Widget commonFlotButton(BuildContext context,String screenName){
       shape: const CircleBorder(),
       child: Icon(Icons.add, color: AppColors.white, size: 30),
     ),
+  );
+}
+
+Widget commonDottedLine() {
+  return DottedLine(
+    dashColor: AppColors.dividerColor,
+    lineThickness: 2,
+    dashLength: 2,
+    dashGapLength: 6,
   );
 }

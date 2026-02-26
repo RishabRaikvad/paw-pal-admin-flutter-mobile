@@ -8,7 +8,7 @@ import 'package:paw_pal_admin/core/AppImages.dart';
 import 'package:paw_pal_admin/utils/commonWidget/gradient_background.dart';
 
 import '../../core/AppColors.dart';
-import '../../core/AppStrings.dart';
+
 import '../../core/CommonMethods.dart';
 import '../../utils/widget_helper.dart';
 

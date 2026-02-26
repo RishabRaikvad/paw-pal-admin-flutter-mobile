@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paw_pal_admin/bloc/authBloc/auth_cubit.dart';
 import 'package:paw_pal_admin/bloc/faqBloc/faq_cubit.dart';
+import 'package:paw_pal_admin/bloc/productBloc/product_cubit.dart';
+import 'package:paw_pal_admin/bloc/productCategoryBloc/product_category_cubit.dart';
 import 'package:paw_pal_admin/bloc/videoBloc/video_cubit.dart';
 import 'package:paw_pal_admin/routes/AppRoutes.dart';
 import 'package:paw_pal_admin/services/firebase_services.dart';
@@ -64,6 +66,8 @@ class _PawPalAppAdminState extends State<PawPalAdminApp> {
         BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
         BlocProvider<VideoCubit>(create: (context) => VideoCubit(FirebaseServices())),
         BlocProvider<FaqCubit>(create: (context) => FaqCubit(FirebaseServices())),
+        BlocProvider<ProductCategoryCubit>(create: (context) => ProductCategoryCubit(FirebaseServices())),
+        BlocProvider<ProductCubit>(create: (context) => ProductCubit(FirebaseServices())),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

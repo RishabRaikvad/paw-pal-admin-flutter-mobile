@@ -65,8 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
             welcomeSubTitle(),
             const SizedBox(height: 4),
             commonTextFieldWithLabel(
-              label: "Email",
-              hint: "Enter your email",
+              label: AppStrings.email,
+              hint: AppStrings.enterEmailAddress,
               context: context,
               controller: emailController,
               inputType: TextInputType.emailAddress,
@@ -76,8 +76,8 @@ class _LoginScreenState extends State<LoginScreen> {
               valueListenable: isPasswordVisible,
               builder: (context, value, child) {
                 return commonTextFieldWithLabel(
-                  label: "Password",
-                  hint: "Enter your password",
+                  label: AppStrings.password,
+                  hint: AppStrings.enterPassword,
                   context: context,
                   obscureText: !value,
                   controller: passwordController,
@@ -150,11 +150,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget welcomeSubTitle() {
     return commonTitle(
-      title:
-          "Sign in to securely manage platform operations and user activity.",
+      title: AppStrings.loginSubtitle,
       fontSize: 14,
       textAlign: TextAlign.start,
-        color: AppColors.grey
+      color: AppColors.grey,
     );
   }
 
@@ -164,16 +163,19 @@ class _LoginScreenState extends State<LoginScreen> {
         final isLoading = state is AuthLoadingState;
         return commonButtonView(
           context: context,
-          buttonText: "Access Dashboard",
+          buttonText: AppStrings.accessDashBoard,
           isLoading: isLoading,
           onClicked: () {
             final email = emailController.text.trim();
             final password = passwordController.text.trim();
             if (email.isEmpty) {
-              CommonMethods().showErrorToast("enter email");
+              CommonMethods().showErrorToast(AppStrings.pleaseEnterEmail);
+              return;
+            } else if (!emailRegex.hasMatch(email)) {
+              CommonMethods().showErrorToast(AppStrings.emailError);
               return;
             } else if (password.isEmpty) {
-              CommonMethods().showErrorToast("enter password");
+              CommonMethods().showErrorToast(AppStrings.pleaseEnterPassword);
               return;
             } else {
               context.read<AuthCubit>().login(

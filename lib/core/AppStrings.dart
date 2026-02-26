@@ -1,5 +1,5 @@
 abstract class AppStrings {
-  static const String appName = "Paw Pal";
+  static const String appName = "Paw Pal Admin";
   static const welcome = "Welcome";
   static const enterPhone = "Enter your phone number to access your";
   static const to = " Back to";
@@ -10,6 +10,7 @@ abstract class AppStrings {
   static const mobileNumber = "Mobile Number";
   static const enterMobileNumber = " Enter Mobile Number";
   static const String otpSent = "OTP sent successfully";
+  static const String accessDashBoard = "Access Dashboard";
   static const welcomeSubtitle =
       "Discover, adopt, and care for pets you love. "
       "Shop essentials, find trusted vets, and keep your furry friends happy daily.";
@@ -18,6 +19,10 @@ abstract class AppStrings {
   static const String termsConditions = "Terms & Conditions";
   static const String andAlsoAgreeWith = "and also agree with ";
   static const String privacyPolicy = "Privacy Policy";
+  static const String manageVideo = "Manage Video";
+  static const String controlVideo = "Control Video Visibility";
+  static const String chooseVideo = "Choose whether this video is shown to users in the PawPal app.";
+  static const String loginSubtitle = "Sign in to securely manage platform operations and user activity.";
 
   static const String otpInfo =
       "We’ll send you a one-time password for secure login.";
@@ -43,6 +48,12 @@ abstract class AppStrings {
 
   static const String email = "Email";
   static const String enterEmailAddress = "Enter Email Address";
+  static const String pleaseEnterEmail = "Please Enter Email";
+  static const String pleaseEnterPassword = "Please Enter Password";
+  static const String emailError = "Please Enter Valid Email";
+
+  static const String password = "Password";
+  static const String enterPassword = "Enter Password";
 
   static const String gender = "Gender";
   static const String male = "Male";
@@ -80,8 +91,9 @@ abstract class AppStrings {
   static const old = "old";
   static const year = "Years";
   static const month = "Months";
-  static const paymentBottomSheetTitle= "Give your pet new Beginning";
-  static const paymentBottomSubSheetTitle= "To ensure a safe adoption community, we charge a small fee whenever you list a pet.";
+  static const paymentBottomSheetTitle = "Give your pet new Beginning";
+  static const paymentBottomSubSheetTitle =
+      "To ensure a safe adoption community, we charge a small fee whenever you list a pet.";
 
   static const String errorInvalidVerificationCode =
       "invalid-verification-code";
@@ -90,7 +102,6 @@ abstract class AppStrings {
   static const String otpInvalid = "Invalid OTP Please try again";
   static const String otpVerificationFailed = "OTP verification failed";
   static const String otpExpired = "OTP has expired, Please request a new code";
-
 
   static const String accountInformation = "Account Information";
   static const String updateProfileTitle = "Update your Profile";
@@ -123,8 +134,6 @@ abstract class AppStrings {
   static const enterOtpError = "Please enter the OTP";
   static const invalidOtpError = "Please enter valid OTP";
 
-
-
   static const String logoutTitle = "Log out ?";
   static const String logoutSubtitle =
       "You can sign back in anytime to access your account and saved details.";
@@ -141,14 +150,13 @@ abstract class AppStrings {
   static const String stayLoggedIn = "Stay Logged In";
   static const String yesLogout = "Yes, Log Out!";
 
-
-
-
   static const String manageAddressDetail = "Manage Address";
   static const String editAddress = "Edit Address";
-  static const String editYourAddress= "Edit Your Address";
-  static const String updatePrimaryAddress= "Update your primary address for deliveries and service appointments.";
-  static const String manageAddressDetailSubTitle = "Manage the address where your orders and services are delivered.";
+  static const String editYourAddress = "Edit Your Address";
+  static const String updatePrimaryAddress =
+      "Update your primary address for deliveries and service appointments.";
+  static const String manageAddressDetailSubTitle =
+      "Manage the address where your orders and services are delivered.";
   static const String state = "State";
   static const String selectState = "Select State";
   static const String city = "City";
@@ -159,9 +167,4 @@ abstract class AppStrings {
   static const String saveAddress = "Save Address";
   static const String address = "Address";
   static const String enterYourAddress = "Enter Your Address";
-
-
-
-
-
 }

@@ -14,6 +14,10 @@ class Routes {
   static const addressDetailScreenPath = '/addressDetailScreenPath';
   static const createFaqScreenPath = '/createFaqScreenPath';
   static const faqScreenPath = '/faqScreenPath';
+  static const createProductCategoryScreenPath = '/createProductCategoryScreenPath';
+  static const productCategoryScreenPath = '/productCategoryScreenPath';
+  static const createProductScreenPath = '/createProductScreenPath';
+
 
 
   // screen Name
@@ -31,6 +35,9 @@ class Routes {
   static const addressDetailScreen = 'addressDetailScreen';
   static const faqScreen = 'faqScreen';
   static const createFaqScreen = 'createFaqScreen';
+  static const createProductCategoryScreen = 'createProductCategoryScreen';
+  static const productCategoryScreen = 'productCategoryScreen';
+  static const  createProductScreen = 'createProductScreen';
 
 
 

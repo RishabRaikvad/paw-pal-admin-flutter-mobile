@@ -2,6 +2,8 @@ enum Gender { male, female }
 
 enum HavePet { yes, no }
 
+enum VariantType { weight, size, none }
+
 class Constant {
   static String razorPayKey = "razorpayKey";
   static String stateWiseCityApiKey = "stateWiseCityApiKey";

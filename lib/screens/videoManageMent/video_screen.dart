@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:paw_pal_admin/bloc/videoBloc/video_cubit.dart';
 import 'package:paw_pal_admin/core/AppColors.dart';
+import 'package:paw_pal_admin/core/AppStrings.dart';
 import 'package:paw_pal_admin/routes/routes.dart';
 import 'package:paw_pal_admin/utils/commonWidget/gradient_background.dart';
 import 'package:paw_pal_admin/utils/widget_helper.dart';
@@ -33,7 +34,7 @@ class _VideoScreenState extends State<VideoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: commonFlotButton(context,Routes.addVideoScreen),
+      floatingActionButton: commonFlotButton(context, Routes.addVideoScreen),
       body: GradientBackground(child: mainView()),
     );
   }
@@ -46,17 +47,19 @@ class _VideoScreenState extends State<VideoScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 20),
-            commonBackWithHeader(context: context, title: "Manage Videos"),
+            commonBackWithHeader(
+              context: context,
+              title: AppStrings.manageVideo,
+            ),
             const SizedBox(height: 20),
             commonTitle(
-              title: "Control Video Visibility",
+              title: AppStrings.controlVideo,
               fontSize: 22,
               fontWeight: FontWeight.w700,
             ),
             const SizedBox(height: 4),
             commonTitle(
-              title:
-                  "Choose whether this video is shown to users in the PawPal app.",
+              title: AppStrings.chooseVideo,
               fontSize: 16,
               color: AppColors.grey,
               textAlign: TextAlign.start,

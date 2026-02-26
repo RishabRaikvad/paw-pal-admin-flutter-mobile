@@ -118,14 +118,14 @@ class CommonMethods {
     }
   }
 
-  String formatPhone(String? phone) {
+  static String formatPhone(String? phone) {
     if (phone == null) return "";
     final digits = phone.replaceAll(RegExp(r'\D'), '');
     return digits.length > 10
         ? digits.substring(digits.length - 10)
         : digits;
   }
-  String formatPrice(num value) {
+  static String formatPrice(num value) {
     if (value >= 1e12) {
       return '₹${(value / 1e12).toStringAsFixed(1).replaceAll('.0', '')}T';
     } else if (value >= 1e7) {
@@ -191,4 +191,6 @@ class CommonMethods {
       throw 'Could not open YouTube';
     }
   }
+
+
 }
