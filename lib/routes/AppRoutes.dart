@@ -6,6 +6,7 @@ import 'package:paw_pal_admin/screens/faq/create_faq.dart';
 import 'package:paw_pal_admin/screens/faq/faq_screen.dart';
 import 'package:paw_pal_admin/screens/product/create_product_category_screen.dart';
 import 'package:paw_pal_admin/screens/product/create_product_screen.dart';
+import 'package:paw_pal_admin/screens/product/product_screen.dart';
 import 'package:paw_pal_admin/screens/videoManageMent/add_video_screen.dart';
 
 import '../screens/product/category_screen.dart';
@@ -66,6 +67,11 @@ class AppRoutes {
         path: Routes.createProductScreenPath,
         name: Routes.createProductScreen,
         builder: (context, state) => CreateProductScreen(),
+      ),
+      GoRoute(
+        path: Routes.productScreenPath,
+        name: Routes.productScreen,
+        builder: (context, state) => ProductScreen(),
       ),
     ],
   );

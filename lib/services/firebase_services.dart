@@ -1,4 +1,5 @@
 import 'package:paw_pal_admin/model/product_category_model.dart';
+import 'package:paw_pal_admin/model/product_model.dart';
 import 'package:paw_pal_admin/model/video_model.dart';
 import 'package:paw_pal_admin/services/firestore_service.dart';
 
@@ -41,5 +42,14 @@ class FirebaseServices {
     return snapshot.docs
         .map((e) => ProductCategoryModel.fromJson(e.data()))
         .toList();
+  }
+
+  Future<void> createProduct(ProductModel model) async {
+    await fireStore.collection("products").doc(model.id).set(model.toJson());
+  }
+
+  Future<List<ProductModel>> getProducts() async {
+    final snapshot = await fireStore.collection("products").get();
+    return snapshot.docs.map((e) => ProductModel.fromJson(e.data())).toList();
   }
 }

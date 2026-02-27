@@ -72,7 +72,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
 
             commonTitle(
               title:
-                  "Add product details, images, and pricing to publish it in your store.",
+              "Add product details, images, and pricing to publish it in your store.",
               fontSize: 16,
               textAlign: TextAlign.start,
               color: AppColors.grey,
@@ -85,16 +85,23 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                   SliverToBoxAdapter(child: productBasicInfoView()),
                   SliverToBoxAdapter(child: const SizedBox(height: 20)),
                   SliverToBoxAdapter(child: commonDottedLine()),
-                  SliverToBoxAdapter(child: const SizedBox(height: 20)),
+                  SliverToBoxAdapter(child: const SizedBox(height: 15)),
                   SliverToBoxAdapter(child: productImagesView()),
                   SliverToBoxAdapter(child: const SizedBox(height: 30)),
-                  if (cubit.selectedCategory?.variantType != VariantType.none &&
-                      cubit.selectedCategory != null) ...[
+                  if (cubit.selectedCategory != null) ...[
                     SliverToBoxAdapter(child: commonDottedLine()),
-                    SliverToBoxAdapter(child: const SizedBox(height: 20)),
-                    SliverToBoxAdapter(child: pricingAndVariantsView()),
-                    SliverToBoxAdapter(child: const SizedBox(height: 20)),
+                    SliverToBoxAdapter(child: const SizedBox(height: 15)),
+
+
+                    if (cubit.selectedCategory!.variantType == VariantType.none)
+                      SliverToBoxAdapter(child: basePriceView()),
+
+                    if (cubit.selectedCategory!.variantType != VariantType.none)
+                      SliverToBoxAdapter(child: pricingAndVariantsView()),
                   ],
+                  SliverToBoxAdapter(child: const SizedBox(height: 30)),
+                  SliverToBoxAdapter(child: uploadProductBtnView()),
+                  SliverToBoxAdapter(child: const SizedBox(height: 30)),
                 ],
               ),
             ),
@@ -137,7 +144,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 children: [
                   commonTitle(
                     title:
-                        cubit.selectedCategory?.categoryName ??
+                    cubit.selectedCategory?.categoryName ??
                         "Select Category",
                     fontSize: 16,
                     color: AppColors.plashHolderColor,
@@ -264,6 +271,21 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
     );
   }
 
+  Widget uploadProductBtnView() {
+    return BlocBuilder<ProductCubit, ProductState>(
+      builder: (context, state) {
+        final isLoading = state is ProductAddLoadState;
+        return commonButtonView(
+            context: context, buttonText: "Publish Product",
+            isLoading: isLoading,
+            onClicked: () {
+              cubit.createProduct(context);
+            });
+
+      },
+    );
+  }
+
   Widget variantView() {
     return Wrap(
       spacing: 12,
@@ -288,7 +310,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                       style: const TextStyle(
                         color: AppColors.black,
                         fontWeight: FontWeight.w500,
-                        fontSize: 14
+                        fontSize: 14,
                       ),
                     ),
                     TextSpan(
@@ -296,7 +318,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                       style: TextStyle(
                         color: AppColors.primaryColor,
                         fontWeight: FontWeight.w600,
-                        fontSize: 14
+                        fontSize: 14,
                       ),
                     ),
                   ],
@@ -325,7 +347,10 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       isScrollControlled: true,
       contentWidget: ConstrainedBox(
         constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height * 0.7,
+          maxHeight: MediaQuery
+              .of(context)
+              .size
+              .height * 0.7,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -343,7 +368,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
 
             commonTitle(
               title:
-                  "Choose the most relevant category for this product. You can also create a new one if needed.",
+              "Choose the most relevant category for this product. You can also create a new one if needed.",
               fontSize: 16,
               color: AppColors.grey,
               textAlign: TextAlign.start,
@@ -382,17 +407,26 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       isScrollControlled: true,
       contentWidget: LayoutBuilder(
         builder: (context, constraints) {
-          final maxHeight = MediaQuery.of(context).size.height * 0.85;
+          final maxHeight = MediaQuery
+              .of(context)
+              .size
+              .height * 0.85;
 
           return ConstrainedBox(
             constraints: BoxConstraints(maxHeight: maxHeight),
             child: SingleChildScrollView(
               padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+                bottom: MediaQuery
+                    .of(context)
+                    .viewInsets
+                    .bottom + 20,
               ),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height * 0.5,
+                  minHeight: MediaQuery
+                      .of(context)
+                      .size
+                      .height * 0.5,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -412,7 +446,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                       "Enter the variant value and set its price for this product.",
                       fontSize: 16,
                       color: AppColors.grey,
-                      textAlign: TextAlign.start
+                      textAlign: TextAlign.start,
                     ),
 
                     const SizedBox(height: 20),
@@ -477,7 +511,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                       hint: "Enter Price",
                       context: context,
                       controller: cubit.productVariantPriceController,
-                      inputType: TextInputType.number
+                      inputType: TextInputType.number,
                     ),
 
                     const SizedBox(height: 30),
@@ -497,17 +531,24 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                             context: context,
                             buttonText: "Add",
                             onClicked: () {
-                             if(cubit.productVariantController.text.isEmpty){
-                               CommonMethods().showErrorToast("Please Enter Value");
-                               return;
-                             }else if(cubit.productVariantPriceController.text.isEmpty){
-                               CommonMethods().showErrorToast("Please Enter Price");
-                               return;
-                             }else {
-                               cubit.addVariant();
-                               context.pop();
-                             }
-                            }
+                              if (cubit.productVariantController.text.isEmpty) {
+                                CommonMethods().showErrorToast(
+                                  "Please Enter Value",
+                                );
+                                return;
+                              } else if (cubit
+                                  .productVariantPriceController
+                                  .text
+                                  .isEmpty) {
+                                CommonMethods().showErrorToast(
+                                  "Please Enter Price",
+                                );
+                                return;
+                              } else {
+                                cubit.addVariant();
+                                context.pop();
+                              }
+                            },
                           ),
                         ),
                       ],
@@ -623,6 +664,27 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget basePriceView() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        commonTitle(
+          title: "Product Price",
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+        ),
+        const SizedBox(height: 10),
+        commonTextFieldWithLabel(
+          label: "Base Price",
+          hint: "Enter Product Price",
+          context: context,
+          controller: cubit.productBasePriceController,
+          inputType: TextInputType.number,
+        ),
+      ],
     );
   }
 
