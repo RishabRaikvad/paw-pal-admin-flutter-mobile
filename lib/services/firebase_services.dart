@@ -1,3 +1,4 @@
+import 'package:paw_pal_admin/model/hospital_model.dart';
 import 'package:paw_pal_admin/model/product_category_model.dart';
 import 'package:paw_pal_admin/model/product_model.dart';
 import 'package:paw_pal_admin/model/video_model.dart';
@@ -51,5 +52,23 @@ class FirebaseServices {
   Future<List<ProductModel>> getProducts() async {
     final snapshot = await fireStore.collection("products").get();
     return snapshot.docs.map((e) => ProductModel.fromJson(e.data())).toList();
+  }
+
+  Future<void> createHospital(HospitalModel model) async {
+    await fireStore.collection("hospitals").doc(model.id).set(model.toJson());
+  }
+
+  Future<void> updateAvailabilityOfHospital({
+    required Map<String, dynamic> object,
+    required String id,
+  }) async {
+    await fireStore.collection("hospitals").doc(id).update(object);
+  }
+
+  Future<List<HospitalModel>> getHospitals() async {
+    final snapshot = await fireStore
+        .collection("hospitals")
+        .get();
+    return snapshot.docs.map((e) => HospitalModel.fromJson(e.data())).toList();
   }
 }

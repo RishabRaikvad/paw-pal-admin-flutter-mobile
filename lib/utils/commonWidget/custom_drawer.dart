@@ -60,6 +60,7 @@ class CustomDrawer extends StatelessWidget {
                   drawerItem(context, title: "Manage Faq's", route: Routes.faqScreen),
                   drawerItem(context, title: "Product Category", route: Routes.productCategoryScreen),
                   drawerItem(context, title: "Product Management", route: Routes.productScreen),
+                  drawerItem(context, title: "Hospital Management", route: Routes.hospitalScree),
 
                   Padding(
                     padding: const EdgeInsets.symmetric(

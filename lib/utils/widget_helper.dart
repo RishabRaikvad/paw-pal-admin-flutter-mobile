@@ -411,7 +411,9 @@ Widget commonPetCareVideoCard({
                                 activeTrackColor: AppColors.greenColor,
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.shrinkWrap,
+                                inactiveTrackColor: Colors.grey.withValues(alpha: 0.5),
                                 inactiveThumbColor: AppColors.white,
+                                trackOutlineColor: WidgetStateProperty.all(Colors.transparent),
                               ),
                             ),
                           );
@@ -759,7 +761,7 @@ Widget commonDottedLine() {
   return DottedLine(
     dashColor: AppColors.dividerColor,
     lineThickness: 2,
-    dashLength: 2,
+    dashLength: 6,
     dashGapLength: 6,
   );
 }
@@ -786,5 +788,18 @@ Widget categoryFilterShimmer() {
         );
       },
     ),
+  );
+}
+
+Widget commonRefreshIndicator({
+  required Widget child,
+  required Future<void> Function() onRefresh,
+}) {
+  return RefreshIndicator(
+    onRefresh: onRefresh,
+    color: AppColors.primaryColor,
+    backgroundColor: AppColors.white,
+    strokeWidth: 3,
+    child: child,
   );
 }

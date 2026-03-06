@@ -4,6 +4,8 @@ import 'package:paw_pal_admin/screens/authentication/login_screen.dart';
 import 'package:paw_pal_admin/screens/dashboard/dashboard_screen.dart';
 import 'package:paw_pal_admin/screens/faq/create_faq.dart';
 import 'package:paw_pal_admin/screens/faq/faq_screen.dart';
+import 'package:paw_pal_admin/screens/hospitalManagement/create_hospital_screen.dart';
+import 'package:paw_pal_admin/screens/hospitalManagement/vet_care_screen.dart';
 import 'package:paw_pal_admin/screens/product/create_product_category_screen.dart';
 import 'package:paw_pal_admin/screens/product/create_product_screen.dart';
 import 'package:paw_pal_admin/screens/product/product_screen.dart';
@@ -72,6 +74,16 @@ class AppRoutes {
         path: Routes.productScreenPath,
         name: Routes.productScreen,
         builder: (context, state) => ProductScreen(),
+      ),
+      GoRoute(
+        path: Routes.createHospitalScreenPath,
+        name: Routes.createHospitalScreen,
+        builder: (context, state) => CreateHospitalScreen(),
+      ),
+      GoRoute(
+        path: Routes.hospitalScreenPath,
+        name: Routes.hospitalScree,
+        builder: (context, state) => VetCareScreen(),
       ),
     ],
   );
