@@ -234,6 +234,7 @@ Widget uploadImageView({
   required BuildContext context,
   required ValueNotifier<File?> uploadedImage,
   required String image,
+  String? imageUrl,
   double width = 100,
   double height = 100,
   double radius = 14,
@@ -250,23 +251,29 @@ Widget uploadImageView({
     child: ValueListenableBuilder(
       valueListenable: uploadedImage,
       builder: (context, img, child) {
-        return img != null
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(radius),
-                child: Image.file(
-                  img,
-                  width: width,
-                  height: height,
-                  fit: BoxFit.cover,
-                ),
-              )
-            : SvgPicture.asset(
-                image,
-                fit: boxFit,
-                alignment: alignment,
-                width: width,
-                height: height,
-              );
+        if (img != null) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(radius),
+            child: Image.file(
+              img,
+              width: width,
+              height: height,
+              fit: BoxFit.cover,
+            ),
+          );
+        }
+
+        if (imageUrl != null && imageUrl.isNotEmpty) {
+          return commonNetworkImage(imageUrl: imageUrl,borderRadius:radius );
+        }
+
+        return SvgPicture.asset(
+          image,
+          fit: boxFit,
+          alignment: alignment,
+          width: width,
+          height: height,
+        );
       },
     ),
   );

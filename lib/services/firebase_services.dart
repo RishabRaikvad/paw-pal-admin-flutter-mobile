@@ -66,9 +66,11 @@ class FirebaseServices {
   }
 
   Future<List<HospitalModel>> getHospitals() async {
-    final snapshot = await fireStore
-        .collection("hospitals")
-        .get();
+    final snapshot = await fireStore.collection("hospitals").get();
     return snapshot.docs.map((e) => HospitalModel.fromJson(e.data())).toList();
+  }
+
+  Future<void> updateHospital(HospitalModel model) async {
+    await fireStore.collection("hospitals").doc(model.id).update(model.toJson());
   }
 }

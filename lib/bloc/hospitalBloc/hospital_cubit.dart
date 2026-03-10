@@ -19,7 +19,7 @@ class HospitalCubit extends Cubit<HospitalState> {
   final FirebaseServices services;
   final fireStore = FireStoreService().fireStore;
   final ImageUploadService imageService = ImageUploadService();
-
+  String? hospitalImg;
   HospitalCubit(this.services) : super(HospitalInitial());
   HospitalModel? hospitalModel;
   TextEditingController nameController = TextEditingController();
@@ -94,7 +94,6 @@ class HospitalCubit extends Cubit<HospitalState> {
     closingController.clear();
   }
 
-  void updateAvailability(int index) {}
 
   Future<void> pickTime({
     required BuildContext context,
@@ -154,6 +153,9 @@ class HospitalCubit extends Cubit<HospitalState> {
         availability: availabilityList,
       );
       await services.createHospital(model);
+      if(context.mounted){
+        context.pop();
+      }
       CommonMethods().showSuccessToast("Hospital Created SuccessFully");
       emit(HospitalCreateSuccess());
     } catch (e) {
@@ -235,13 +237,49 @@ class HospitalCubit extends Cubit<HospitalState> {
     phoneController.text = model.contactNumber;
     addressController.text = model.address;
 
-    selectedSpecializations = model.specializations;
+    selectedSpecializations = List.from(model.specializations);
 
-    // hospitalImageNotifier.value = model.imageUrl ?? "";
+     hospitalImg = model.imageUrl;
 
     availabilityList = model.availability;
 
     emit(HospitalUpdate());
+  }
+
+  void updateHospital(BuildContext context,String id)async{
+    emit(HospitalCreateLoading());
+    try{
+      final user = CommonMethods.getCurrentUser();
+      if (user == null) return;
+      hospitalImg = hospitalModel?.imageUrl ?? "";
+       if(hospitalImageNotifier.value !=null){
+         hospitalImg = await imageService.uploadImage(
+        image: hospitalImageNotifier.value,
+        uid: user.uid,
+      );
+       }
+      HospitalModel model = HospitalModel(
+        id: id,
+        hospitalName: nameController.text.trim(),
+        aboutHospital: descriptionController.text.trim(),
+        imageUrl: hospitalImg ?? "",
+        contactNumber: phoneController.text.trim(),
+        address: addressController.text.trim(),
+        specializations: selectedSpecializations,
+        availability: availabilityList,
+      );
+      await services.updateHospital(model);
+      await getHospitals();
+      if(context.mounted){
+        context.pop();
+      }
+      CommonMethods().showSuccessToast("Hospital Updated SuccessFully");
+      emit(HospitalCreateSuccess());
+    }catch(e){
+      CommonMethods().showErrorToast(e.toString());
+      debugPrint("Errror :${e.toString()}");
+      emit(HospitalCreateError(e.toString()));
+    }
   }
 
   void resetHospitalForm() {
@@ -269,6 +307,6 @@ class HospitalCubit extends Cubit<HospitalState> {
       AvailabilityModel(day: "Saturday"),
     ];
 
-    emit(HospitalInitial());
+   // emit(HospitalInitial());
   }
 }

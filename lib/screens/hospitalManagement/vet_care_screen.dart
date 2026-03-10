@@ -152,6 +152,8 @@ class _VetCareScreenState extends State<VetCareScreen> {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
                   ),
+                  height: 200,
+                  width: double.infinity
                 ),
                 Positioned(
                   bottom: 20,

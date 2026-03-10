@@ -20,6 +20,7 @@ class CreateHospitalScreen extends StatefulWidget {
 
 class _CreateHospitalScreenState extends State<CreateHospitalScreen> {
   late HospitalCubit cubit;
+
   bool get isEdit => cubit.hospitalModel != null;
 
   @override
@@ -50,17 +51,17 @@ class _CreateHospitalScreenState extends State<CreateHospitalScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 20),
-            commonBackWithHeader(context: context, title: "Add Hospital"),
+            commonBackWithHeader(context: context, title: isEdit ? "Update Hospital" : "Add Hospital"),
             const SizedBox(height: 20),
             commonTitle(
-              title: "Create Hospital Profile",
+              title: isEdit ? "Update Care Center Profile" : "Create Hospital Profile",
               fontSize: 22,
               textAlign: TextAlign.start,
               fontWeight: FontWeight.w700,
             ),
             const SizedBox(height: 4),
             commonTitle(
-              title:
+              title: isEdit ? "Modify hospital details to maintain accurate information for PawPal users." :
                   "Add complete and accurate hospital details to build trust and help users find the right care.",
               fontSize: 16,
               textAlign: TextAlign.start,
@@ -79,7 +80,6 @@ class _CreateHospitalScreenState extends State<CreateHospitalScreen> {
                   SliverToBoxAdapter(child: const SizedBox(height: 30)),
                   SliverToBoxAdapter(child: hospitalBtn()),
                   SliverToBoxAdapter(child: const SizedBox(height: 30)),
-
                 ],
               ),
             ),
@@ -182,6 +182,7 @@ class _CreateHospitalScreenState extends State<CreateHospitalScreen> {
           image: AppImages.icMainPet,
           width: double.infinity,
           height: 200,
+          imageUrl: cubit.hospitalImg
         ),
         const SizedBox(height: 15),
         commonDottedLine(),
@@ -264,9 +265,13 @@ class _CreateHospitalScreenState extends State<CreateHospitalScreen> {
                               cubit.toggleDayAvailability(index, value);
                             },
                             activeTrackColor: AppColors.greenColor,
-                            inactiveTrackColor: Colors.grey.withValues(alpha: 0.5),
+                            inactiveTrackColor: Colors.grey.withValues(
+                              alpha: 0.5,
+                            ),
                             inactiveThumbColor: AppColors.white,
-                            trackOutlineColor: WidgetStateProperty.all(Colors.transparent),
+                            trackOutlineColor: WidgetStateProperty.all(
+                              Colors.transparent,
+                            ),
                           ),
                         ),
                       ],
@@ -562,9 +567,13 @@ class _CreateHospitalScreenState extends State<CreateHospitalScreen> {
         final isLoading = state is HospitalCreateLoading;
         return commonButtonView(
           context: context,
-          buttonText: "Save Hospital",
+          buttonText: isEdit ? "Update Hospital" : "Save Hospital",
           onClicked: () {
-            cubit.createHospital(context);
+            if (isEdit) {
+              cubit.updateHospital(context, cubit.hospitalModel?.id ?? "");
+            } else {
+              cubit.createHospital(context);
+            }
           },
           isLoading: isLoading,
         );
