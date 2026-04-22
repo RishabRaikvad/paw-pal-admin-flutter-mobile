@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paw_pal_admin/core/AppColors.dart';
+import 'package:paw_pal_admin/core/AppImages.dart';
+import 'package:paw_pal_admin/utils/commonWidget/gradient_background.dart';
+import 'package:paw_pal_admin/utils/widget_helper.dart';
 
 import '../../utils/commonWidget/custom_drawer.dart';
 
@@ -21,12 +25,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: const CustomDrawer(),
-
-
-      body: SafeArea(child: mainView()),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: AppColors.linearBg,
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        key: _scaffoldKey,
+        drawer: Drawer(
+          backgroundColor: Colors.transparent,
+          child: const CustomDrawer(),
+        ),
+        body: SafeArea(
+          child: mainView(),
+        ),
+      ),
     );
   }
 
@@ -41,21 +54,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
             onTap: () {
               _scaffoldKey.currentState?.openDrawer();
             },
-            child: Container(
-              height: 35,
-              width: 35,
-              decoration: BoxDecoration(
-                color: Colors.orange,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Icon(
-                Icons.menu,
-                color: Colors.white,
-              ),
-            ),
+            child:Stack(
+              alignment: Alignment.center,
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(AppImages.icDrawer),
+                  ],
+                ),
+                Center(
+                  child: commonTitle(
+                    title: "Dashboard",
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            )
           ),
         ],
       ),
+    );
+  }
+
+  Widget dashBoardCardView(){
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.white,
+      ),
+      child: Column(),
     );
   }
 }

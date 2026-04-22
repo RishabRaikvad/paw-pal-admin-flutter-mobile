@@ -40,6 +40,7 @@ abstract class AppImages {
   static const String icLocation = "assets/icons/ic_location.svg";
   static const String icAddNewPet = "assets/icons/ic_add_new_pet.svg";
   static const String icAddCategory = "assets/icons/ic_add_category.svg";
+  static const String icDrawer = "assets/icons/ic_drawer.svg";
 
   static const String icUnselectedHome = "assets/icons/ic_unselected_home.svg";
   static const String icUnSelectedAdoption =
