@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paw_pal_admin/bloc/authBloc/auth_cubit.dart';
+import 'package:paw_pal_admin/bloc/dashboardBloc/dashboard_cubit.dart';
 import 'package:paw_pal_admin/bloc/faqBloc/faq_cubit.dart';
 import 'package:paw_pal_admin/bloc/hospitalBloc/hospital_cubit.dart';
 import 'package:paw_pal_admin/bloc/productBloc/product_cubit.dart';
@@ -65,6 +66,7 @@ class _PawPalAppAdminState extends State<PawPalAdminApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
+        BlocProvider<DashboardCubit>(create: (context) => DashboardCubit()),
         BlocProvider<VideoCubit>(create: (context) => VideoCubit(FirebaseServices())),
         BlocProvider<FaqCubit>(create: (context) => FaqCubit(FirebaseServices())),
         BlocProvider<ProductCategoryCubit>(create: (context) => ProductCategoryCubit(FirebaseServices())),

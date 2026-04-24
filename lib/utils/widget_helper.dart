@@ -772,6 +772,18 @@ Widget commonDottedLine() {
     dashGapLength: 6,
   );
 }
+Widget verticalDottedLine({double? height}) {
+  return SizedBox(
+    height: height ?? double.infinity,
+    child: DottedLine(
+      direction: Axis.vertical,
+      dashColor: AppColors.dividerColor,
+      lineThickness: 2,
+      dashLength: 6,
+      dashGapLength: 6,
+    ),
+  );
+}
 
 Widget categoryFilterShimmer() {
   return SizedBox(

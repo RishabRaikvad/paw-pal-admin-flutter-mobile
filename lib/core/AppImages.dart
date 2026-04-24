@@ -41,6 +41,14 @@ abstract class AppImages {
   static const String icAddNewPet = "assets/icons/ic_add_new_pet.svg";
   static const String icAddCategory = "assets/icons/ic_add_category.svg";
   static const String icDrawer = "assets/icons/ic_drawer.svg";
+  static const String icTotalHospital = "assets/icons/ic_total_hospital.svg";
+  static const String icTotalOrder = "assets/icons/ic_total_orders.svg";
+  static const String icTotalUser = "assets/icons/ic_total_user.svg";
+  static const String icTotalVideo = "assets/icons/ic_total_video.svg";
+  static const String icTotalRevenue = "assets/icons/ic_total_revenue.svg";
+  static const String icTotalProductCategory = "assets/icons/ic_total_product_category.svg";
+  static const String icTotalPetCategory = "assets/icons/ic_total_pet_category.svg";
+  static const String icTotalProduct = "assets/icons/ic_total_products.svg";
 
   static const String icUnselectedHome = "assets/icons/ic_unselected_home.svg";
   static const String icUnSelectedAdoption =
