@@ -20,6 +20,7 @@ class Routes {
   static const productScreenPath = '/productScreenPath';
   static const createHospitalScreenPath = '/createHospitalScreenPath';
   static const hospitalScreenPath = '/hospitalScreenPath';
+  static const userScreenPath = '/userScreenPath';
 
 
 
@@ -43,7 +44,8 @@ class Routes {
   static const  createProductScreen = 'createProductScreen';
   static const  productScreen = 'productScreen';
   static const  createHospitalScreen = 'createHospitalScreen';
-  static const  hospitalScree = 'hospitalScree';
+  static const  hospitalScreen = 'hospitalScreen';
+  static const  userScreen = 'userScreen';
 
 
 

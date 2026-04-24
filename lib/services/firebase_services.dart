@@ -5,6 +5,7 @@ import 'package:paw_pal_admin/model/video_model.dart';
 import 'package:paw_pal_admin/services/firestore_service.dart';
 
 import '../model/faq_model.dart';
+import '../model/user_model.dart';
 
 class FirebaseServices {
   final fireStore = FireStoreService().fireStore;
@@ -72,5 +73,28 @@ class FirebaseServices {
 
   Future<void> updateHospital(HospitalModel model) async {
     await fireStore.collection("hospitals").doc(model.id).update(model.toJson());
+  }
+
+  Future<List<UserModel>> getUsers() async {
+    final snapshot = await fireStore.collection("users").get();
+    return snapshot.docs.map((e) => UserModel.fromJson(e.data())).toList();
+  }
+
+  Future<Map<String, int>> getUserPetCounts() async {
+    final snapshot = await fireStore.collection("pets").get();
+
+    Map<String, int> petCountMap = {};
+
+    for (var doc in snapshot.docs) {
+      String ownerId = doc['ownerId'];
+
+      if (petCountMap.containsKey(ownerId)) {
+        petCountMap[ownerId] = petCountMap[ownerId]! + 1;
+      } else {
+        petCountMap[ownerId] = 1;
+      }
+    }
+
+    return petCountMap;
   }
 }

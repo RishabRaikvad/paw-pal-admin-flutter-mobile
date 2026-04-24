@@ -418,7 +418,7 @@ Widget commonPetCareVideoCard({
                                 activeTrackColor: AppColors.greenColor,
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.shrinkWrap,
-                                inactiveTrackColor: Colors.grey.withValues(alpha: 0.5),
+                                inactiveTrackColor: AppColors.grey,
                                 inactiveThumbColor: AppColors.white,
                                 trackOutlineColor: WidgetStateProperty.all(Colors.transparent),
                               ),

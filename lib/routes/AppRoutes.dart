@@ -9,6 +9,7 @@ import 'package:paw_pal_admin/screens/hospitalManagement/vet_care_screen.dart';
 import 'package:paw_pal_admin/screens/product/create_product_category_screen.dart';
 import 'package:paw_pal_admin/screens/product/create_product_screen.dart';
 import 'package:paw_pal_admin/screens/product/product_screen.dart';
+import 'package:paw_pal_admin/screens/userManagement/user_management_screen.dart';
 import 'package:paw_pal_admin/screens/videoManageMent/add_video_screen.dart';
 
 import '../screens/product/category_screen.dart';
@@ -82,8 +83,13 @@ class AppRoutes {
       ),
       GoRoute(
         path: Routes.hospitalScreenPath,
-        name: Routes.hospitalScree,
+        name: Routes.hospitalScreen,
         builder: (context, state) => VetCareScreen(),
+      ),
+      GoRoute(
+        path: Routes.userScreenPath,
+        name: Routes.userScreen,
+        builder: (context, state) => UserManagementScreen(),
       ),
     ],
   );

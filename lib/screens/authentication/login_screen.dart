@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
             welcomeTitle(),
             const SizedBox(height: 3),
             welcomeSubTitle(),
-            const SizedBox(height: 4),
+            const SizedBox(height: 14),
             commonTextFieldWithLabel(
               label: AppStrings.email,
               hint: AppStrings.enterEmailAddress,
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
               controller: emailController,
               inputType: TextInputType.emailAddress,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             ValueListenableBuilder(
               valueListenable: isPasswordVisible,
               builder: (context, value, child) {

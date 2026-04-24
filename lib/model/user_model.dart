@@ -1,0 +1,86 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class UserModel {
+  final String uid;
+  final String name;
+  final String lastName;
+  final String phone;
+  final String email;
+  final String gender;
+  final bool isProfileCompleted;
+  final String address;
+  final String state;
+  final String city;
+  final String pinCode;
+  final bool hasPet;
+  final DateTime createdAt;
+  final String? profileImageUrl;
+  final List<String> fcmTokens;
+
+
+  UserModel({
+    required this.uid,
+    required this.name,
+    required this.lastName,
+    required this.phone,
+    required this.email,
+    required this.gender,
+    required this.isProfileCompleted,
+    required this.address,
+    required this.state,
+    required this.city,
+    required this.pinCode,
+    required this.hasPet,
+    required this.createdAt,
+    required this.profileImageUrl,
+    required this.fcmTokens,
+  });
+
+  factory UserModel.fromJson(Map<String, dynamic> map) {
+    return UserModel(
+      uid: map['uid'] ?? '',
+      name: map['name'] ?? '',
+      lastName: map['lastName'] ?? '',
+      phone: map['phone'] ?? '',
+      email: map['email'] ?? '',
+      gender: map['gender'] ?? '',
+      isProfileCompleted: map['isProfileCompleted'] ?? false,
+      address: map['address'] ?? '',
+      state: map['state'] ?? '',
+      city: map['city'] ?? '',
+      pinCode: map['pinCode'] ?? '',
+      hasPet: map['hasPet'] ?? false,
+      createdAt: map['createdAt'] != null
+          ? (map['createdAt'] as Timestamp).toDate()
+          : DateTime.now(),
+      profileImageUrl: map['profileImageUrl'] ?? '',
+      fcmTokens: (map['fcmTokens'] as List<dynamic>?)
+          ?.map((e) => e.toString())
+          .toList() ??
+          [],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'uid': uid,
+      'name': name,
+      'lastName':lastName,
+      'phone': phone,
+      'email': email,
+      'gender': gender,
+      'isProfileCompleted': isProfileCompleted,
+      'address': address,
+      'state': state,
+      'city': city,
+      'pinCode': pinCode,
+      'hasPet': hasPet,
+      'createdAt': Timestamp.fromDate(createdAt),
+      'profileImageUrl': profileImageUrl,
+      "fcmTokens": fcmTokens,
+    };
+  }
+}
+
+

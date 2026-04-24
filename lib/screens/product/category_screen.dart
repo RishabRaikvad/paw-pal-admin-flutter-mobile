@@ -49,7 +49,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             const SizedBox(height: 20),
 
             commonTitle(
-              title: "Pet Category Management",
+              title: "Product Category Management",
               fontSize: 22,
               textAlign: TextAlign.start,
               fontWeight: FontWeight.w700,
@@ -84,6 +84,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 
   SliverGrid categoryGridView() {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double itemWidth = screenWidth / 3;
+    double itemHeight = 130;
     return SliverGrid(
       delegate: SliverChildBuilderDelegate((context, index) {
         final category = cubit.lstCategory[index];
@@ -96,7 +99,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         crossAxisCount: 3,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        childAspectRatio: 0.88,
+        childAspectRatio: itemWidth / itemHeight,
       ),
     );
   }
@@ -119,8 +122,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ClipOval(
               child: commonNetworkImage(
                 imageUrl: imgUrl,
-                height: 52,
-                width: 52,
+                height: 50,
+                width: 50,
               ),
             ),
             commonTitle(

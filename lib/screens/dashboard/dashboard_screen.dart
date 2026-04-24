@@ -144,14 +144,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Expanded(
               child: dashBoardCardView(
                 icon: AppImages.icTotalProductCategory,
-                title: "Total Product Category",
+                title: "Total Product\nCategory",
                 count: cubit.totalProductCategory.toString(),
               ),
             ),
             Expanded(
               child: dashBoardCardView(
                 icon: AppImages.icTotalPetCategory,
-                title: "Total Pet Category",
+                title: "Total Pet\nCategory",
                 count: cubit.totalPetCategory.toString(),
               ),
             ),
