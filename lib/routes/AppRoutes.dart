@@ -12,6 +12,9 @@ import 'package:paw_pal_admin/screens/product/product_screen.dart';
 import 'package:paw_pal_admin/screens/userManagement/user_management_screen.dart';
 import 'package:paw_pal_admin/screens/videoManageMent/add_video_screen.dart';
 
+import '../screens/orderManagementBloc/order_detail_screen.dart';
+import '../screens/orderManagementBloc/order_screen.dart';
+import '../screens/petCategory/create_pet_category_screen.dart';
 import '../screens/product/category_screen.dart';
 import '../screens/splash/splash_screen.dart';
 import '../screens/videoManageMent/video_screen.dart';
@@ -90,6 +93,21 @@ class AppRoutes {
         path: Routes.userScreenPath,
         name: Routes.userScreen,
         builder: (context, state) => UserManagementScreen(),
+      ),
+      GoRoute(
+        path: Routes.orderScreenPath,
+        name: Routes.orderScreen,
+        builder: (context, state) => OrderScreen(),
+      ),
+      GoRoute(
+        path: Routes.orderDetailScreenPath,
+        name: Routes.orderDetailScreen,
+        builder: (context, state) => OrderDetailScreen(),
+      ),
+      GoRoute(
+        path: Routes.createPetCategoryScreenPath,
+        name: Routes.createPetCategoryScreen,
+        builder: (context, state) => CreatePetCategoryScreen(),
       ),
     ],
   );

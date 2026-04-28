@@ -67,6 +67,11 @@ abstract class AppImages {
   static const String icAppIconPlaceholder =
       "assets/icons/ic_app_icon_placeholder.svg";
 
+  static const String icOrderDetailDelivered = "assets/icons/ic_order_detail_delivered.svg";
+  static const String icOrderDetailPending = "assets/icons/ic_order_detail_pending.svg";
+  static const String icOrderDetailCancel = "assets/icons/ic_order_detail_cancel.svg";
+  static const String icOrderDetailPayment = "assets/icons/ic_order_detail_payment.svg";
+
   /// images
   static const String imgWelcome = "assets/images/welcome.png";
   static const String imgLoginBg = "assets/images/img_login_bg.png";

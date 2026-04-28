@@ -7,10 +7,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:paw_pal_admin/core/AppImages.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
+import '../model/order_model.dart';
 import '../routes/routes.dart';
+import 'AppColors.dart';
 import 'AppStrings.dart';
 
 class CommonMethods {
@@ -192,5 +196,44 @@ class CommonMethods {
     }
   }
 
+ static String formatDate(DateTime date) {
+    return DateFormat('d MMMM yyyy').format(date);
+  }
+
+  static Color getOrderStatusColor(OrderStatus status) {
+    if (status == OrderStatus.delivered) {
+      return AppColors.orderDeliveredColor;
+    } else if (status == OrderStatus.cancel) {
+      return AppColors.orderCancelColor;
+    }
+    return AppColors.orderPendingColor;
+  }
+
+ static Color getOrderDateColor(OrderStatus status) {
+    if (status == OrderStatus.delivered) {
+      return AppColors.greenColor;
+    } else if (status == OrderStatus.cancel) {
+      return AppColors.redColor;
+    }
+    return AppColors.primaryColor;
+  }
+
+  static String getOrderStatusWiseIcon(OrderStatus status) {
+    if (status == OrderStatus.delivered) {
+      return AppImages.icOrderDetailDelivered;
+    } else if (status == OrderStatus.cancel) {
+      return AppImages.icOrderDetailCancel;
+    }
+    return AppImages.icOrderDetailPending;
+  }
+
+  static String getOrderStatusTitle(OrderStatus status,String userName) {
+    if (status == OrderStatus.delivered) {
+      return "Order Delivered Successfully !";
+    } else if (status == OrderStatus.cancel) {
+      return "Order Cancelled by $userName";
+    }
+    return "Preparing $userName’s Order";
+  }
 
 }

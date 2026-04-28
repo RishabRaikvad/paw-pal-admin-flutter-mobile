@@ -29,4 +29,7 @@ abstract class AppColors {
     ],
     stops: [0.1,1.0]
   );
+  static const Color orderDeliveredColor = Color(0xffE3F9E6);
+  static const Color orderPendingColor = Color(0xffFFEAD4);
+  static const Color orderCancelColor = Color(0xffFEECEC);
 }

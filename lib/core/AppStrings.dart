@@ -14,6 +14,8 @@ abstract class AppStrings {
   static const welcomeSubtitle =
       "Discover, adopt, and care for pets you love. "
       "Shop essentials, find trusted vets, and keep your furry friends happy daily.";
+  static const String dot = "•";
+
 
   static const String agreeTo = "I agree to the ";
   static const String termsConditions = "Terms & Conditions";

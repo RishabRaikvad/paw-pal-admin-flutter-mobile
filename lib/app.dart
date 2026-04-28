@@ -9,6 +9,8 @@ import 'package:paw_pal_admin/bloc/authBloc/auth_cubit.dart';
 import 'package:paw_pal_admin/bloc/dashboardBloc/dashboard_cubit.dart';
 import 'package:paw_pal_admin/bloc/faqBloc/faq_cubit.dart';
 import 'package:paw_pal_admin/bloc/hospitalBloc/hospital_cubit.dart';
+import 'package:paw_pal_admin/bloc/orderBloc/order_cubit.dart';
+import 'package:paw_pal_admin/bloc/petCategoryBloc/pet_category_cubit.dart';
 import 'package:paw_pal_admin/bloc/productBloc/product_cubit.dart';
 import 'package:paw_pal_admin/bloc/productCategoryBloc/product_category_cubit.dart';
 import 'package:paw_pal_admin/bloc/userManagementBloc/user_management_cubit.dart';
@@ -17,6 +19,7 @@ import 'package:paw_pal_admin/routes/AppRoutes.dart';
 import 'package:paw_pal_admin/services/firebase_services.dart';
 import 'package:paw_pal_admin/theme/AppTheme.dart';
 
+import 'bloc/orderDetailBloc/order_detail_cubit.dart';
 import 'core/AppStrings.dart';
 
 Future<Widget> initializeApp() async {
@@ -68,16 +71,35 @@ class _PawPalAppAdminState extends State<PawPalAdminApp> {
       providers: [
         BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
         BlocProvider<DashboardCubit>(create: (context) => DashboardCubit()),
-        BlocProvider<VideoCubit>(create: (context) => VideoCubit(FirebaseServices())),
-        BlocProvider<FaqCubit>(create: (context) => FaqCubit(FirebaseServices())),
-        BlocProvider<ProductCategoryCubit>(create: (context) => ProductCategoryCubit(FirebaseServices())),
-        BlocProvider<ProductCubit>(create: (context) => ProductCubit(FirebaseServices())),
-        BlocProvider<HospitalCubit>(create: (context) => HospitalCubit(FirebaseServices())),
-        BlocProvider<UserManagementCubit>(create: (context) => UserManagementCubit(FirebaseServices())),
+        BlocProvider<VideoCubit>(
+          create: (context) => VideoCubit(FirebaseServices()),
+        ),
+        BlocProvider<FaqCubit>(
+          create: (context) => FaqCubit(FirebaseServices()),
+        ),
+        BlocProvider<ProductCategoryCubit>(
+          create: (context) => ProductCategoryCubit(FirebaseServices()),
+        ),
+        BlocProvider<ProductCubit>(
+          create: (context) => ProductCubit(FirebaseServices()),
+        ),
+        BlocProvider<HospitalCubit>(
+          create: (context) => HospitalCubit(FirebaseServices()),
+        ),
+        BlocProvider<UserManagementCubit>(
+          create: (context) => UserManagementCubit(FirebaseServices()),
+        ),
+        BlocProvider<OrderCubit>(
+          create: (context) => OrderCubit(FirebaseServices()),
+        ),
+        BlocProvider<OrderDetailCubit>(create: (context) => OrderDetailCubit(FirebaseServices())),
+        BlocProvider<PetCategoryCubit>(
+          create: (context) => PetCategoryCubit(FirebaseServices()),
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-//showPerformanceOverlay: true,
+        //showPerformanceOverlay: true,
         title: AppStrings.appName,
         routeInformationProvider: AppRoutes.router.routeInformationProvider,
         routeInformationParser: AppRoutes.router.routeInformationParser,

@@ -1,4 +1,6 @@
 import 'package:paw_pal_admin/model/hospital_model.dart';
+import 'package:paw_pal_admin/model/order_model.dart';
+import 'package:paw_pal_admin/model/pet_category_model.dart';
 import 'package:paw_pal_admin/model/product_category_model.dart';
 import 'package:paw_pal_admin/model/product_model.dart';
 import 'package:paw_pal_admin/model/video_model.dart';
@@ -97,4 +99,39 @@ class FirebaseServices {
 
     return petCountMap;
   }
+
+  Future<List<OrderModel>> getOrders() async {
+    final snapshot = await fireStore
+        .collection("orders")
+        .orderBy("createdAt", descending: true)
+        .get();
+    return snapshot.docs.map((e) => OrderModel.fromJson(e.data())).toList();
+  }
+
+  Future<Map<String, dynamic>?> getUserById(String uid) async {
+    try {
+      final doc = await fireStore
+          .collection('users')
+          .doc(uid)
+          .get();
+
+      if (doc.exists) {
+        return doc.data();
+      }
+    } catch (e) {
+      print("User fetch error: $e");
+    }
+    return null;
+  }
+
+  Future<void> deliveredOrder(String orderId) async {
+    await fireStore.collection("orders").doc(orderId).update({
+      "orderStatus": OrderStatus.delivered.name,
+    });
+  }
+
+  Future<void> createPetCategory(PetCategoryModel pet) async {
+    await fireStore.collection("pet_category").doc(pet.id).set(pet.toJson());
+  }
+
 }

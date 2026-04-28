@@ -21,6 +21,9 @@ class Routes {
   static const createHospitalScreenPath = '/createHospitalScreenPath';
   static const hospitalScreenPath = '/hospitalScreenPath';
   static const userScreenPath = '/userScreenPath';
+  static const orderScreenPath = '/orderScreenPath';
+  static const orderDetailScreenPath = '/orderDetailScreenPath';
+  static const createPetCategoryScreenPath = '/createPetCategoryScreenPath';
 
 
 
@@ -46,6 +49,9 @@ class Routes {
   static const  createHospitalScreen = 'createHospitalScreen';
   static const  hospitalScreen = 'hospitalScreen';
   static const  userScreen = 'userScreen';
+  static const orderScreen = 'orderScreen';
+  static const orderDetailScreen = 'orderDetailScreen';
+  static const createPetCategoryScreen = 'createPetCategoryScreen';
 
 
 
