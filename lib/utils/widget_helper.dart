@@ -14,6 +14,7 @@ import '../core/AppColors.dart';
 import '../core/AppImages.dart';
 import '../core/CommonMethods.dart';
 import '../core/constant.dart';
+import '../model/product_model.dart';
 import '../routes/routes.dart';
 
 final nameRegEx = RegExp(r"^[A-Za-z][A-Za-z\s'.-]{1,29}$");
@@ -505,6 +506,8 @@ Widget commonProductCard({
   required String imgUrl,
   required String size,
   required String rating,
+  required ProductModel model,
+  required ValueChanged<bool> onChange,
 }) {
   return Container(
     decoration: BoxDecoration(
@@ -590,6 +593,36 @@ Widget commonProductCard({
               ],
             ),
           ),
+          Flexible(
+            child: Row(
+              children: [
+                Expanded(
+                  child: commonTitle(
+                    title: "Visible to User",
+                    fontSize: 12,
+                    maxLines: 1,
+                    overFlow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                Transform.scale(
+                  scale: 0.70,
+                  child: Switch(
+                    value: model.isActive,
+                    onChanged: (newValue) {
+                      onChange(newValue);
+                    },
+                    activeTrackColor: AppColors.greenColor,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    inactiveTrackColor: AppColors.grey,
+                    inactiveThumbColor: AppColors.white,
+                    trackOutlineColor:
+                    WidgetStateProperty.all(Colors.transparent),
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     ),

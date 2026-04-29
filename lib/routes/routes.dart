@@ -24,6 +24,7 @@ class Routes {
   static const orderScreenPath = '/orderScreenPath';
   static const orderDetailScreenPath = '/orderDetailScreenPath';
   static const createPetCategoryScreenPath = '/createPetCategoryScreenPath';
+  static const petCategoryScreenPath = '/petCategoryScreenPath';
 
 
 
@@ -52,6 +53,7 @@ class Routes {
   static const orderScreen = 'orderScreen';
   static const orderDetailScreen = 'orderDetailScreen';
   static const createPetCategoryScreen = 'createPetCategoryScreen';
+  static const petCategoryScreen = 'petCategoryScreen';
 
 
 

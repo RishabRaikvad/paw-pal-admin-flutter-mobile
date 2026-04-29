@@ -109,7 +109,7 @@ class _ProductScreenState extends State<ProductScreen> {
         crossAxisCount: 2,
         crossAxisSpacing: 8,
         mainAxisSpacing: 14,
-        childAspectRatio: 0.65,
+        childAspectRatio: 0.58,
       ),
       delegate: SliverChildBuilderDelegate((context, index) {
         final product = cubit.filteredProducts[index];
@@ -119,6 +119,10 @@ class _ProductScreenState extends State<ProductScreen> {
           productName: product.name,
           rating: product.rating,
           size: cubit.getProductSize(product) ?? "",
+          model: product,
+          onChange: (newValue) {
+            cubit.updateAvailabilityOfProduct(index, newValue, product.id);
+          },
         );
       }, childCount: cubit.filteredProducts.length),
     );

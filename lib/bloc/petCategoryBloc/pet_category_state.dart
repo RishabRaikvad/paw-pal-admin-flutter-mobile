@@ -13,3 +13,15 @@ final class AddPetErrorState extends PetCategoryState {
 
   AddPetErrorState(this.error);
 }
+
+final class PetCategoryLoadState extends PetCategoryState {}
+
+final class PetCategoryRefreshState extends PetCategoryState {}
+
+final class PetCategorySuccessState extends PetCategoryState {}
+
+final class PetCategoryErrorState extends PetCategoryState {
+  final String error;
+
+  PetCategoryErrorState(this.error);
+}

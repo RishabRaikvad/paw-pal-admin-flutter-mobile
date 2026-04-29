@@ -9,7 +9,7 @@ class ProductModel {
   final String categoryName;
   final String mainProductImage;
   final List<String> images;
-  final bool isActive;
+   bool isActive;
   final double basePrice;
   final String rating;
   final List<ProductVariant> variants;

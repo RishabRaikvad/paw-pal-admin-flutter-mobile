@@ -38,7 +38,7 @@ class _CreatePetCategoryScreenState extends State<CreatePetCategoryScreen> {
           children: [
             const SizedBox(height: 20),
 
-            commonBackWithHeader(context: context, title: "Pet Category"),
+            commonBackWithHeader(context: context, title: "Add Pet Category"),
 
             const SizedBox(height: 20),
 
@@ -53,13 +53,13 @@ class _CreatePetCategoryScreenState extends State<CreatePetCategoryScreen> {
 
             commonTitle(
               title:
-              "Organize pets into categories for better browsing and adoption.",
+                  "Organize pets into categories for better browsing and adoption.",
               fontSize: 16,
               textAlign: TextAlign.start,
               color: AppColors.grey,
             ),
 
-            const SizedBox(height: 50),
+            const SizedBox(height: 30),
 
             commonTextFieldWithLabel(
               label: "Pet Category",
@@ -68,17 +68,21 @@ class _CreatePetCategoryScreenState extends State<CreatePetCategoryScreen> {
               controller: cubit.categoryController,
             ),
             const SizedBox(height: 30),
+            Spacer(),
             BlocBuilder<PetCategoryCubit, PetCategoryState>(
               builder: (context, state) {
                 final isLoading = state is AddPetLoadState;
-                return commonButtonView(context: context,
-                    buttonText: "Publish Pet Category",
-                    isLoading: isLoading,
-                    onClicked: () {
-                      cubit.createPetCategory(context);
-                    });
+                return commonButtonView(
+                  context: context,
+                  buttonText: "Publish Pet Category",
+                  isLoading: isLoading,
+                  onClicked: () {
+                    cubit.createPetCategory(context);
+                  },
+                );
               },
-            )
+            ),
+            const SizedBox(height: 30),
           ],
         ),
       ),

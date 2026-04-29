@@ -6,6 +6,7 @@ import 'package:paw_pal_admin/screens/faq/create_faq.dart';
 import 'package:paw_pal_admin/screens/faq/faq_screen.dart';
 import 'package:paw_pal_admin/screens/hospitalManagement/create_hospital_screen.dart';
 import 'package:paw_pal_admin/screens/hospitalManagement/vet_care_screen.dart';
+import 'package:paw_pal_admin/screens/petCategory/pet_category_screen.dart';
 import 'package:paw_pal_admin/screens/product/create_product_category_screen.dart';
 import 'package:paw_pal_admin/screens/product/create_product_screen.dart';
 import 'package:paw_pal_admin/screens/product/product_screen.dart';
@@ -108,6 +109,11 @@ class AppRoutes {
         path: Routes.createPetCategoryScreenPath,
         name: Routes.createPetCategoryScreen,
         builder: (context, state) => CreatePetCategoryScreen(),
+      ),
+      GoRoute(
+        path: Routes.petCategoryScreenPath,
+        name: Routes.petCategoryScreen,
+        builder: (context, state) => PetCategoryScreen(),
       ),
     ],
   );

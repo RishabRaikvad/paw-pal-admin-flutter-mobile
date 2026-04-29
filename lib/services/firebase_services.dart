@@ -57,6 +57,13 @@ class FirebaseServices {
     return snapshot.docs.map((e) => ProductModel.fromJson(e.data())).toList();
   }
 
+  Future<void> updateAvailabilityOfProduct({
+    required Map<String, dynamic> object,
+    required String id,
+  }) async {
+    await fireStore.collection("products").doc(id).update(object);
+  }
+
   Future<void> createHospital(HospitalModel model) async {
     await fireStore.collection("hospitals").doc(model.id).set(model.toJson());
   }
@@ -132,6 +139,13 @@ class FirebaseServices {
 
   Future<void> createPetCategory(PetCategoryModel pet) async {
     await fireStore.collection("pet_category").doc(pet.id).set(pet.toJson());
+  }
+
+  Future<List<PetCategoryModel>> getPetCategory() async {
+    final snapshot = await fireStore.collection("pet_category").get();
+    return snapshot.docs
+        .map((e) => PetCategoryModel.fromJson(e.data()))
+        .toList();
   }
 
 }

@@ -15,6 +15,7 @@ class PetCategoryCubit extends Cubit<PetCategoryState> {
   PetCategoryCubit(this.services) : super(PetCategoryInitial());
   final fireStore = FireStoreService().fireStore;
   TextEditingController categoryController = TextEditingController();
+  List<PetCategoryModel> lstPetCategory = [];
 
   void createPetCategory(BuildContext context) async {
     emit(AddPetLoadState());
@@ -27,12 +28,23 @@ class PetCategoryCubit extends Cubit<PetCategoryState> {
       );
 
       await services.createPetCategory(pet);
+      await getPetCategory();
       CommonMethods().showSuccessToast("Pet Category Create SuccessFully");
       if (!context.mounted) return;
       context.pop();
       emit(AddPetSuccessState());
     } catch (e) {
       emit(AddPetErrorState(e.toString()));
+    }
+  }
+
+  Future<void> getPetCategory() async {
+    emit(lstPetCategory.isNotEmpty ? PetCategoryRefreshState() : PetCategoryLoadState());
+    try {
+      lstPetCategory = await services.getPetCategory();
+      emit(PetCategorySuccessState());
+    } catch (e) {
+      emit(PetCategoryErrorState(e.toString()));
     }
   }
 

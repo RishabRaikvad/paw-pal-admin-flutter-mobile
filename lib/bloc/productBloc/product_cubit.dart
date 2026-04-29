@@ -5,9 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:paw_pal_admin/core/CommonMethods.dart';
 import 'package:paw_pal_admin/core/constant.dart';
-import 'package:paw_pal_admin/model/product_category_model.dart';
 import 'package:paw_pal_admin/services/firebase_services.dart';
 
+import '../../model/product_category_model.dart';
 import '../../model/product_model.dart';
 import '../../services/firestore_service.dart';
 import '../../services/image_upload_service.dart';
@@ -161,6 +161,25 @@ class ProductCubit extends Cubit<ProductState> {
       emit(ProductSuccessState());
     } catch (e) {
       emit(ProductErrorState(e.toString()));
+    }
+  }
+
+  Future<void> updateAvailabilityOfProduct(
+      int index,
+      bool value,
+      String id,
+      ) async {
+    try {
+      lstProduct[index].isActive = value;
+      emit(ProductSuccessState());
+      await services.updateAvailabilityOfProduct(
+        id: id,
+        object: {"isActive": value},
+      );
+    } catch (e) {
+      lstProduct[index].isActive = !value;
+      CommonMethods().showErrorToast(e.toString());
+      emit(ProductSuccessState());
     }
   }
 
